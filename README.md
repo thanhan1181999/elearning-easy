@@ -26,3 +26,5 @@ Things you may want to cover:
 Nested Attribute : cho phép lưu các thuộc tính của một bản ghi thông qua cha mẹ liên kết của nó
 dùng accepts_nested_attributes_for trong model để kích hoạt
 https://viblo.asia/p/tim-hieu-ve-nested-attributes-trong-rails-MgNeWoaAeYx
+
+====================================================================================
