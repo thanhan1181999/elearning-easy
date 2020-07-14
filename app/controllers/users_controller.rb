@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params) # Not the final implementation!
     if @user.save
+      log_in @user
+      flash[:success] = "Welcome to the Languafe easy!"
       redirect_to @user
     else
       render 'new'

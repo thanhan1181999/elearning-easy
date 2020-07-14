@@ -1,0 +1,15 @@
+<% provide(:title, "Log in") %>
+  
+<div class="row d-flex justify-content-center flex-column align-items-center">
+        <h1>Log in</h1>
+        <div class="col-md-6">
+            <%= form_for(:session, url: login_path) do |f| %> 
+                <%= f.label :email %>
+                <%= f.email_field :email, class: 'form-control' %> 
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control mb-2' %> 
+                <%= f.submit "Log in", class: "btn btn-primary m-auto d-block" %>
+            <% end %>
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p> 
+        </div>
+</div>
