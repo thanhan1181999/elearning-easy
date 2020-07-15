@@ -10,7 +10,7 @@ class User < ApplicationRecord
                 format: { with: VALID_EMAIL_REGEX},
                 :uniqueness => {:case_sensitive => false}
     has_secure_password
-    validates :password, presence: true, length: {minimum:6}
+    validates :password, presence: true, length: {minimum:6}, allow_blank: true
 
     def User.digest(string)
         cost =  cost = ActiveModel::SecurePassword.min_cost ? 
@@ -39,4 +39,5 @@ class User < ApplicationRecord
     def forget 
         update_attribute(:remember_digest, nil)
     end
+
 end
