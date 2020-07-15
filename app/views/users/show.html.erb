@@ -1,2 +1,24 @@
-<h1>Users#show</h1>
-<%=@user.name%>
+<% provide(:title, @user.name) %> 
+<div class="row">
+    <aside class="col-md-3"> 
+        <section class="user_info">
+            <h1>
+                <%= @user.name %> 
+            </h1>
+        </section>
+    </aside>
+    <div class="col-md-9">
+    <% if @user.courses.any? %>
+        
+        <h3></a>Your Course : <%= @user.courses.count %></h3>
+      
+        <div class="container-fluid">
+            <div class="row">
+                <%= render @courses %>
+            </div>
+        </div>
+
+        <%= will_paginate @courses, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer %>
+    <% end %>
+    </div>
+</div>

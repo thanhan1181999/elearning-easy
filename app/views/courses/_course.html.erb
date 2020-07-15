@@ -1,0 +1,13 @@
+
+<div id="course-<%= course.id %>" class="col-4 mb-3">
+<a href="#">
+    <div class="card h-100">
+        <img class="card-img-top" src="#" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><%= course.name %></h5>
+            <p class="card-text"> Created at : <%= time_ago_in_words(course.created_at) %> ago.</p>
+        </div>
+    </div>
+</a>
+</div>
+

@@ -23,6 +23,10 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 # faker data with db.seed
 gem 'faker'
+# paginate
+gem "will_paginate"
+gem 'will_paginate-bootstrap4'
+gem 'bootstrap-sass'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
