@@ -28,8 +28,13 @@ CourseCategory.create!(name: "Japanese")
 en= CourseCategory.find(1)
 jp= CourseCategory.find(2)
 users = User.order(:created_at).take(6) 
-20.times do
+10.times do
     name = Faker::Lorem.sentence(word_count: 20)
     users.each { |user| user.courses.create!(name: name, 
-        course_category_id: en.id) } 
+    course_category_id: en.id, picture: "default_img.png") } 
 end
+
+# User.find(1).courses.each do |course| 
+#     name = Faker::Lorem.sentence(word_count: 5)
+#     course.lessons.create!(name: name,course_id: courses.id, picture: "download.png")
+# end

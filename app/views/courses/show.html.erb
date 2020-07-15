@@ -1,0 +1,10 @@
+<% provide(:title, @user.name) %> 
+<%= @course.name %>
+
+    <% if @lesson.any? %>
+        <div class="container-fluid">
+            <div class="row">
+                <%= render @courses %>
+            </div>
+        </div>
+    <% end %>

@@ -1,0 +1,17 @@
+current directory: /Users/nguyenthanhan/workspace/elearning_app/vendor/bundle/gems/aliyun-sdk-0.7.3/ext/crcx
+/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/bin/ruby -I /System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0 -r ./siteconf20200715-1837-159x68g.rb extconf.rb
+creating Makefile
+
+current directory: /Users/nguyenthanhan/workspace/elearning_app/vendor/bundle/gems/aliyun-sdk-0.7.3/ext/crcx
+make "DESTDIR=" clean
+
+current directory: /Users/nguyenthanhan/workspace/elearning_app/vendor/bundle/gems/aliyun-sdk-0.7.3/ext/crcx
+make "DESTDIR="
+compiling crc64_ecma.c
+compiling crcx.c
+linking shared-object aliyun/crcx.bundle
+ld: warning: directory not found for option '-L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.Internal.sdk/usr/local/lib'
+
+current directory: /Users/nguyenthanhan/workspace/elearning_app/vendor/bundle/gems/aliyun-sdk-0.7.3/ext/crcx
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 crcx.bundle ./.gem.20200715-1837-1sgxcjj/aliyun

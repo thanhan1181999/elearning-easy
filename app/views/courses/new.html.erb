@@ -1,0 +1,11 @@
+<%= form_for(@course, html: { multipart: true }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %> 
+    <div class="field">
+        <%= f.text_area :name, placeholder: "name of course..." %>
+    </div>
+    <span class="picture">
+        <%= f.file_field :picture, accept:  'image/jpeg,image/gif,image/png' %> 
+    </span>
+    <%=select("course", "course_category_id", @courseCategory.all.collect {|p| [ p.name, p.id ] })%>
+    <%= f.submit "Post", class: "btn btn-primary" %> 
+<% end %>
