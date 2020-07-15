@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  course: one
+  lesson: one
+  word: one
+  remember: false
+
+two:
+  user: two
+  course: two
+  lesson: two
+  word: two
+  remember: false

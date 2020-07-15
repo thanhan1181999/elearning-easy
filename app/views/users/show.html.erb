@@ -1,12 +1,24 @@
 <% provide(:title, @user.name) %> 
 <div class="row">
-    <aside class="col-md-3"> 
-        <section class="user_info">
-            <h1>
-                <%= @user.name %> 
-            </h1>
-        </section>
-    </aside>
+    <div class="col-md-3 mt-4"> 
+        <div class="card">
+            <div class="card-header">
+                <%if @user.picture?%>
+                    <%= image_tag(@user.picture, class:"img-user")%>
+                <%else%>
+                    <%= image_tag("default_img.png", class:"img-user")%>
+                <%end%>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><%= @user.name %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><%=@user.courses.count%> created courses</li>
+                <li class="list-group-item"><%=@study.group(:course_id).count.count%> studied courses</li>
+            </ul>
+        </div>        
+    </div>
+
     <div class="col-md-9">
     <% if @user.courses.any? %>
         

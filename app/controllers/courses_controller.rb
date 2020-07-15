@@ -20,7 +20,7 @@ class CoursesController < ApplicationController
     #get to show all lesson in course
     def show
         @course = Course.find(params[:id])
-        @lessons = @course.lesson
+        @lessons = @course.lessons 
     end
 
     private

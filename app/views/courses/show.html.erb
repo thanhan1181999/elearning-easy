@@ -1,10 +1,9 @@
-<% provide(:title, @user.name) %> 
 <%= @course.name %>
 
-    <% if @lesson.any? %>
+    <% if @lessons.any? %>
         <div class="container-fluid">
-            <div class="row">
-                <%= render @courses %>
+            <div class="CourseShowLesson">
+                <%= render @lessons %>
             </div>
         </div>
     <% end %>

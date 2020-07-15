@@ -1,0 +1,15 @@
+<a href="<%= lesson_path(lesson.id)%>" class="linkLessionOfList">
+    <% if lesson.picture?%>
+        <%= image_tag(lesson.picture.url) %>
+    <% elsif%>
+        <%= image_tag("default_img.png") %>
+    <% end %>
+    <h4>
+        <%= lesson.name %>
+    </h4>
+    <div>
+        <%=lesson.words.count %> words
+    </div>
+</a>
+ 
+
