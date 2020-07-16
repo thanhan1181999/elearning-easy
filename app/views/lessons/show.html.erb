@@ -1,0 +1,6 @@
+show all words in a lesson
+
+<%= link_to "add a new word", new_word_path(lesson_id: @lesson_id), class: "btn btn-primary"%>
+<div class="lessonShowWord">
+  <%= render @words %>
+</div>

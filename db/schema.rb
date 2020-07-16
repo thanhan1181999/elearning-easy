@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2020_07_15_164720) do
   create_table "lessons_words", id: false, force: :cascade do |t|
     t.integer "lesson_id", null: false
     t.integer "word_id", null: false
+    t.index ["lesson_id", "word_id"], name: "index_lessons_words_on_lesson_id_and_word_id"
+    t.index ["word_id", "lesson_id"], name: "index_lessons_words_on_word_id_and_lesson_id"
   end
 
   create_table "studies", force: :cascade do |t|

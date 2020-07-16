@@ -1,9 +1,14 @@
-<%= @course.name %>
+    
+    <div>
+    <%= @course.name %>
+    <%= link_to "add a new word", new_word_path(lesson_id: @course.id),class: "btn btn-primary"%>
+    <%= link_to "add a new lesson", new_lesson_path(course_id: @course.id),class: "btn btn-primary"%>
+    </div>  
 
     <% if @lessons.any? %>
         <div class="container-fluid">
             <div class="CourseShowLesson">
-                <%= render @lessons %>
-            </div>
+                <%= render @lessons %> 
+            </div>   
         </div>
     <% end %>

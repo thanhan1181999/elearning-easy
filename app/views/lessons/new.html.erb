@@ -1,0 +1,8 @@
+create a new lesson
+<%= form_for(@lesson, html:{multipart:true}) do |f|%>
+  <%= render 'shared/error_messages', object: f.object %> 
+  <%= f.text_area :name %>
+  <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'%>
+  <%= f.text_area :course_id, value: params[:course_id] , style: "display:none" %>
+  <%= f.submit "Create lesson", class: "btn btn-primary"%>
+<% end%>

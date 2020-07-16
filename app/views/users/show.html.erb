@@ -13,7 +13,10 @@
                 <h5 class="card-title"><%= @user.name %></h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><%=@user.courses.count%> created courses</li>
+                <li class="list-group-item">
+                    <%=@user.courses.count%> created courses
+                    <%= link_to "create new course", new_course_path, class: "btn btn-primary m-auto d-block" %>
+                </li>
                 <li class="list-group-item"><%=@study.group(:course_id).count.count%> studied courses</li>
             </ul>
         </div>        

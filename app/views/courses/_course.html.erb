@@ -1,18 +1,21 @@
 
 <div id="course-<%= course.id %>" class="col-4 mb-3">
-<a href="<%= course_path(course.id)%>">
+
     <div class="card h-100">
-    <% if course.picture?%>
-        <%= image_tag(course.picture.url, class: "card-img-top") %>
-    <% elsif%>
-        <%= image_tag("default_img.png", class: "card-img-top") %>
-    <% end %>
+    <a href="<%= course_path(course.id)%>">
+        <% if course.picture?%>
+            <%= image_tag(course.picture.url, class: "card-img-top") %>
+        <% elsif%>
+            <%= image_tag("default_img.png", class: "card-img-top") %>
+        <% end %>
+    </a>
         <div class="card-body">
             <h5 class="card-title"><%= course.name %></h5>
             <p class="card-text"> Created at : <%= time_ago_in_words(course.created_at) %> ago.</p>
+            <%= link_to "Logout",  course_delete_path(course_id: course.id), class:"dropdown-item", method: "delete" %>
         </div>
     </div>
-</a>
+
 </div>
  
 

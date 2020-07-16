@@ -23,6 +23,12 @@ class CoursesController < ApplicationController
         @lessons = @course.lessons 
     end
 
+    def destroy
+        Course.find(params[:course_id]).destroy
+        flash[:success] = "Course deleted"
+        redirect_to user_path current_user
+    end
+
     private
         def course_params 
             params.require(:course).permit(:content, :picture, :course_category_id, :name)
