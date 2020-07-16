@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   delete '/course/delete', to: 'courses#destroy'
   resources :users
   resources :courses
-  resources :lessons
+  resources :lessons do
+    get :flashcard
+  end
   resources :words
   resources :account_activations, only: [:edit]
 end
