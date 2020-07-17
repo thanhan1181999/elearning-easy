@@ -91,4 +91,25 @@ h1 {
     cursor: pointer;
     margin: 5px;
 }
+.carousel .card{
+    height: 415px;
+    width: 420px;
+    cursor: pointer;
+    margin: 10px;
+}
+#carouselExampleControls{
+    border: 1px solid;
+    background: #f12f13;
+}
+.image-flashcard{
+    width: 100%;
+}
+.carousel-control-prev{
 
+}
+.carousel-control-next{
+
+}
+.fadeout{
+    display: none!important;
+}

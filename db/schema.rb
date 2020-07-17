@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_164720) do
+ActiveRecord::Schema.define(version: 2020_07_16_161045) do
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2020_07_15_164720) do
     t.index ["course_category_id"], name: "index_courses_on_course_category_id"
     t.index ["user_id", "course_category_id", "created_at"], name: "index_courses_on_user_id_and_course_category_id_and_created_at"
     t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_follows_on_course_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -49,14 +58,10 @@ ActiveRecord::Schema.define(version: 2020_07_15_164720) do
 
   create_table "studies", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "course_id", null: false
-    t.integer "lesson_id", null: false
     t.integer "word_id", null: false
     t.boolean "remember"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_studies_on_course_id"
-    t.index ["lesson_id"], name: "index_studies_on_lesson_id"
     t.index ["user_id"], name: "index_studies_on_user_id"
     t.index ["word_id"], name: "index_studies_on_word_id"
   end
@@ -84,9 +89,9 @@ ActiveRecord::Schema.define(version: 2020_07_15_164720) do
 
   add_foreign_key "courses", "course_categories"
   add_foreign_key "courses", "users"
+  add_foreign_key "follows", "courses"
+  add_foreign_key "follows", "users"
   add_foreign_key "lessons", "courses"
-  add_foreign_key "studies", "courses"
-  add_foreign_key "studies", "lessons"
   add_foreign_key "studies", "users"
   add_foreign_key "studies", "words"
 end

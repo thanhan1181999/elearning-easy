@@ -1,7 +1,7 @@
 show all words in a lesson
 
 <%= link_to "add a new word", new_word_path(lesson_id: @lesson.id), class: "btn btn-primary"%>
-<%= link_to "flashCard", lesson_flashcard_path(@lesson), class: "btn btn-primary"%>
+<%= link_to "flashCard", flashcard_lesson_path(@lesson), class: "btn btn-primary"%>
 <div class="lessonShowWord">
   <%= render @words %>
 </div>

@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :users
   resources :courses
   resources :lessons do
-    get :flashcard
+    member do
+      get :flashcard
+    end
   end
   resources :words
   resources :account_activations, only: [:edit]
