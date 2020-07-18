@@ -5,22 +5,22 @@
 # #
 # #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 # # #   Character.create(name: 'Luke', movie: movies.first)
-# # User.create!(name: "thanhan",
-# #     email: "nguyenthanhan1181999@gmail.com",
-# #     password: "123456", 
-# #     password_confirmation: "123456", 
-# #     activated: true,
-# #     activated_at: Time.zone.now)
-# # User.create!(name: "thuthuy",
-# #     email: "thuthuy@gmail.com",
-# #     password: "123456", 
-# #     password_confirmation: "123456", 
-# #     activated: true,
-# #     activated_at: Time.zone.now)
+User.create!(name: "thanhan",
+    email: "nguyenthanhan1181999@gmail.com",
+    password: "123456", 
+    password_confirmation: "123456", 
+    activated: true,
+    activated_at: Time.zone.now)
+User.create!(name: "thuthuy",
+    email: "thuthuy@gmail.com",
+    password: "123456", 
+    password_confirmation: "123456", 
+    activated: true,
+    activated_at: Time.zone.now)
 
 # # add type of course
-# CourseCategory.create!(name: "English")
-# CourseCategory.create!(name: "Japanese")
+CourseCategory.create!(name: "English")
+CourseCategory.create!(name: "Japanese")
 # #add user
 # 10.times do |n|
 #     name = Faker::Name.name
@@ -33,24 +33,24 @@
 #         activated_at: Time.zone.now)
 # end
 # #add course
-# en= CourseCategory.find(1)
-# jp= CourseCategory.find(2)
+en= CourseCategory.find(1)
+jp= CourseCategory.find(2)
 
 # # users = User.order(:created_at).take(6)
 user1 = User.where('email=?',"nguyenthanhan1181999@gmail.com")[0]
-# user2 = User.where('email=?',"thuthuy@gmail.com")[0]
-# 3.times do
-#     name = Faker::Lorem.sentence(word_count: 5)
-#     user1.courses.create!(name: name, 
-#     course_category_id: en.id, picture: "default_img.png") 
-# end
-# 4.times do
-#     name = Faker::Lorem.sentence(word_count: 5)
-#     user2.courses.create!(name: name, 
-#     course_category_id: jp.id, picture: "default_img.png") 
-# end
+user2 = User.where('email=?',"thuthuy@gmail.com")[0]
+3.times do
+    name = Faker::Lorem.sentence(word_count: 5)
+    user1.courses.create!(name: name, 
+    course_category_id: en.id, picture: "default_img.png") 
+end
+4.times do
+    name = Faker::Lorem.sentence(word_count: 5)
+    user2.courses.create!(name: name, 
+    course_category_id: jp.id, picture: "default_img.png") 
+end
 
-# user1.courses[0].lessons.create!(name: "greeting", picture: "download.png")
+user1.courses[0].lessons.create!(name: "greeting", picture: "download.png")
 @lesson = user1.courses[0].lessons[0]
 @word = Word.new(word: "hello",meaning:"xin chao",picture:"default_img.png")
 @lesson.words << @word
