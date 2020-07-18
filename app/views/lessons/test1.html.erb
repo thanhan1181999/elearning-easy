@@ -1,0 +1,93 @@
+<% @length = @words.length %>
+<% language=@words[0].lessons[0].course.course_category.name%>
+
+<% 
+def answer(pos,randomArray)
+  arr=[]
+  randomArray.each do |element|
+    arr << (@words[pos].meaning==element)
+  end
+  arr
+end
+%>
+
+<% def randomArray(pos)
+  @kq=[@words[pos].meaning]
+  3.times{ 
+    meaning = @words[0].meaning
+    while @kq.include? meaning
+      meaning = @words[rand(@length-1)].meaning
+    end
+    @kq << meaning 
+  }
+  @kq.shuffle!
+end
+%>
+
+
+<div id="carouselTestControls" class="p-4 carousel slide" 
+style="max-width: 800px; margin: auto;">
+  <div class="text-center mb-3">
+    <div class="bg-info p-2 rounded d-inline">
+      cau <span id="current-active">0</span>/<%=@length%>
+    </div>
+    <div class="bg-info p-2 rounded d-inline">
+      <span id="current-false">0</span> sai / 
+      <span id="current-true">0</span> dung
+    </div>
+  </div>
+  <div class="carousel-inner">
+    <% @words.each_with_index.map do |word,index| %>
+      <% if index==0 
+          active="active" 
+        else 
+          active="" 
+        end 
+      %>
+      <% choices=randomArray(index)%>
+      <% answer=answer(index,choices)%>
+
+      <div class="carousel-item <%=active%>" position=<%=index%>>
+        <div class="d-flex flex-column align-items-center">
+
+          <figure class="figure" style="max-width: 360px">
+            <% if word.picture?%>
+              <%= image_tag(word.picture.url, class:"img-thumbnail w-100 figure-img img-fluid rounded")%>
+            <% else %>
+              <%= image_tag("default_img.png", class:"img-thumbnail w-100 figure-img img-fluid rounded")%>
+            <% end %>
+            <figcaption class="figure-caption text-center">
+              <h2 class="text-center active-word" language=<%=language%>>
+                <%=word.word%>
+              </h2>
+            </figcaption>
+          </figure>
+
+          <div class="container">
+            <div class="row">
+              <div class="<%=answer[0]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices" >
+                <%=choices[0]%>
+              </div>
+              <div class="<%=answer[1]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices">
+                <%=choices[1]%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="<%=answer[2]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices">
+                <%=choices[2]%>
+              </div>
+              <div class="<%=answer[3]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices">
+                <%=choices[3]%>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+</div>
+
+<%= javascript_pack_tag 'test1' %>

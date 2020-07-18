@@ -19,6 +19,10 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
     @words = @lesson.words
   end
+  def test1
+    @lesson = Lesson.find(params[:id])
+    @words = @lesson.words
+  end
   private
     def lesson_param
       params.require(:lesson).permit(:name,:picture,:course_id)

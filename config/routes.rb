@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :lessons do
     member do
-      get :flashcard
+      get :flashcard, :test1
     end
   end
   resources :words
