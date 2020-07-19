@@ -1,7 +1,9 @@
 class User < ApplicationRecord
     has_many :courses, dependent: :destroy
+    has_many :studies, dependent: :destroy
     attr_accessor :remember_token, :activation_token
-
+    mount_uploader :picture, PictureUploader
+    
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     before_save {self.email = email.downcase } # hoặc sử dụng email.downcase!
 

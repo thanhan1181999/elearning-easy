@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_to_user_path_if_logged_in, only: [:new]
+  before_action :redirect_to_user_path_if_logged_in, only: [:new, :create]
   #get login
   def new
   end

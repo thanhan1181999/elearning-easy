@@ -1,0 +1,13 @@
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+<%= will_paginate %>
+<div>
+<% @users.each do |user| %>
+<div class="d-flex  align-items-center">
+<%= image_tag(user.picture.url,class:"img-user-small flex-grow-2") if user.picture? %>
+<%= image_tag("default_img.png",class:"img-user-small flex-grow-2") unless user.picture? %>
+<%= link_to user.name, user, class:"flex-grow-2" %>
+</div>
+<% end %>
+</ul>
+<%= will_paginate %>

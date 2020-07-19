@@ -1,31 +1,18 @@
 <% provide(:title, @user.name) %> 
+<% 
+if current_user_by_params? 
+    nameOfCreatedCourse = "Your Course"
+else
+    nameOfCreatedCourse = @user.name + "'s Course"
+end
+%>
 <div class="row">
-    <div class="col-md-3 mt-4"> 
-        <div class="card">
-            <div class="card-header">
-                <%if @user.picture?%>
-                    <%= image_tag(@user.picture, class:"img-user")%>
-                <%else%>
-                    <%= image_tag("default_img.png", class:"img-user")%>
-                <%end%>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><%= @user.name %></h5>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <%=@user.courses.count%> created courses
-                    <%= link_to "create new course", new_course_path, class: "btn btn-primary m-auto d-block" %>
-                </li>
-                <li class="list-group-item"><%=@study.group(:course_id).count.count%> studied courses</li>
-            </ul>
-        </div>        
-    </div>
+    <%= render 'userInforAction'%>
 
     <div class="col-md-9">
     <% if @user.courses.any? %>
         
-        <h3></a>Your Course : <%= @user.courses.count %></h3>
+        <h3><%=nameOfCreatedCourse%> : <%= @user.courses.count %></h3>
       
         <div class="container-fluid">
             <div class="row">

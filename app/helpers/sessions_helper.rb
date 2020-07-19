@@ -24,6 +24,12 @@ module SessionsHelper
     def current_user?(user)
         user == current_user
     end
+    
+    # by params
+    def current_user_by_params?
+        params[:id].to_i.eql? current_user.id
+    end
+
     # not go to get login when loggined
     def redirect_to_user_path_if_logged_in
         redirect_to root_path if logged_in?

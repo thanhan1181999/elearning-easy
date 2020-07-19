@@ -1,7 +1,7 @@
 <% @length = @words.length %>
 <% language=@words[0].lessons[0].course.course_category.name%>
-
-<% 
+<div id="current_user_id"><%=session[:user_id]%></div>
+<%
 def answer(pos,randomArray)
   arr=[]
   randomArray.each do |element|
@@ -27,6 +27,8 @@ end
 
 <div id="carouselTestControls" class="p-4 carousel slide" 
 style="max-width: 800px; margin: auto;">
+
+  <div id="alert-message-from-server" class="alert" style="height:50px"></div>
   <div class="text-center mb-3">
     <div class="bg-info p-2 rounded d-inline">
       cau <span id="current-active">0</span>/<%=@length%>
@@ -36,7 +38,9 @@ style="max-width: 800px; margin: auto;">
       <span id="current-true">0</span> dung
     </div>
   </div>
+
   <div class="carousel-inner">
+
     <% @words.each_with_index.map do |word,index| %>
       <% if index==0 
           active="active" 
@@ -44,7 +48,7 @@ style="max-width: 800px; margin: auto;">
           active="" 
         end 
       %>
-      <% choices=randomArray(index)%>
+     <% choices=randomArray(index)%>
       <% answer=answer(index,choices)%>
 
       <div class="carousel-item <%=active%>" position=<%=index%>>
@@ -57,12 +61,12 @@ style="max-width: 800px; margin: auto;">
               <%= image_tag("default_img.png", class:"img-thumbnail w-100 figure-img img-fluid rounded")%>
             <% end %>
             <figcaption class="figure-caption text-center">
-              <h2 class="text-center active-word" language=<%=language%>>
+              <h2 class="text-center active-word" language=<%=language%> id=<%=word.id%>>
                 <%=word.word%>
               </h2>
             </figcaption>
           </figure>
-
+          
           <div class="container">
             <div class="row">
               <div class="<%=answer[0]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices" >
@@ -86,6 +90,7 @@ style="max-width: 800px; margin: auto;">
         </div>
       </div>
     <% end %>
+
   </div>
   
 </div>

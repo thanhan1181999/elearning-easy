@@ -1,8 +1,12 @@
 show all words in a lesson
 
-<%= link_to "add a new word", new_word_path(lesson_id: @lesson.id), class: "btn btn-primary"%>
-<%= link_to "flashCard", flashcard_lesson_path(@lesson), class: "btn btn-primary"%>
-<%= link_to "test one", test1_lesson_path(@lesson), class: "btn btn-primary"%>
+<%= link_to("add a new word", 
+  new_word_path, 
+  class: "btn btn-primary") if current_user?(Lesson.find(params[:id]).course.user) %>
+<%= link_to("flashCard", flashcard_lesson_path(@lesson), 
+  class: "btn btn-primary") if @lesson.words.count >=3 %>
+<%= link_to("test one", test1_lesson_path(@lesson), 
+  class: "btn btn-primary") if @lesson.words.count >=7 %>
 <div class="lessonShowWord">
   <%= render @words %>
 </div>

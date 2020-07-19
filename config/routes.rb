@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'studies/create'
+  get 'studies/destroy'
   root 'static_pages#home'
   get '/home', to: 'static_pages#home'
   get '/about', to: 'static_pages#about'
@@ -12,11 +14,21 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   delete '/course/delete', to: 'courses#destroy'
-  resources :users
+
+  resources :users do
+    member do
+      get :studiedWords
+      resources :courses, only: [:new]
+    end
+  end
+
+  resources :studies, only: [:create, :destroy]
+
   resources :courses
   resources :lessons do
     member do
       get :flashcard, :test1
+      resources :words, only: [:new]
     end
   end
   resources :words

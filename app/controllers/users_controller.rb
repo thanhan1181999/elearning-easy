@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :show]
-  before_action :correct_user, only: [:edit, :update, :show]
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -27,6 +27,7 @@ class UsersController < ApplicationController
     @courses = @user.courses.paginate(page: params[:page], per_page: 6)
     @study = Study.where("user_id=?", params[:id])
   end
+  
   # get form to update
   def edit
     @user = User.find(params[:id])
@@ -48,9 +49,15 @@ class UsersController < ApplicationController
     flash[:success] = "User deleted"
     redirect_to users_url
   end
+
+  #show words remember
+  def studiedWords
+    @studys = Study.where(user_id: params[:id])
+  end
+
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :picture)
     end
     # Confirms the correct user.
     def correct_user
@@ -66,7 +73,7 @@ class UsersController < ApplicationController
     end
 
     def logged_in_user
-      store_location
+      store_location #in session helper
       unless logged_in?
         flash[:danger] = "Please log in."
         redirect_to login_path

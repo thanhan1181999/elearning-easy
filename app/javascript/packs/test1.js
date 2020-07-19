@@ -3,6 +3,7 @@ import { lessonSpeaker } from './textToSpeech'
 import 'bootstrap'
 
 //contructor
+let user_id = $('#current_user_id').text();
 let length = parseInt($('.carousel-inner .carousel-item:last-child').attr('position'))+1
 let currentrue = 0
 let currentfalse = 0
@@ -11,14 +12,16 @@ function getActive(){
 }
 function getActiveWord(){
   let word=$('.carousel-inner .active .active-word').text();
+  let id=$('.carousel-inner .active .active-word').attr('id');
   let language=$('.carousel-inner .active .active-word').attr('language')
-  return {language,word}
+  return {language,word,id}
 }
 
 function checkAnswer(choiced){
   let answer = choiced.attr('class')
   return (answer.includes('true'))
 }
+
 function updateView(choiced){
   $('#carouselTestControls .true').addClass('bg-success')
   if (checkAnswer(choiced)) { 
@@ -45,9 +48,29 @@ $('#carouselTestControls').on('slid.bs.carousel', function () {
   $('#carouselTestControls #current-active').text((getActive())+'');
 })
 
+function updateDb(choiced){
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  let method = checkAnswer(choiced) ? "POST" : "DELETE"
+  let url = checkAnswer(choiced) ? `/studies`: `/studies/delete`
+  let data = {
+    study:{
+      user_id,
+      word_id: getActiveWord().id
+    }
+  }
+  $.ajax({
+    method, url, data, dataType: 'script'
+  });
+}
+
 //handle click
 $('#carouselTestControls .choices').click(function(){
   updateView($(this));
+  updateDb($(this));
   if(getActive()==length){
     alert(currentfalse +" false/ "+currentrue+" true ")
     return;

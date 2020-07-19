@@ -31,9 +31,11 @@
 
       <div class="back-flashcard fadeout w-100 h-100">
         <%if word.picture? %>
-          <%= image_tag(word.picture.url, class:"image-flashcard")%>
+          <%= image_tag(word.picture.url, class:"image-flashcard",
+          style:"width: 418px;height: 314px")%>
         <%else%>
-          <%= image_tag("default_img.png", class:"image-flashcard")%>
+          <%= image_tag("default_img.png", class:"image-flashcard",
+          style:"width: 418px;height: 314px")%>
         <%end%>
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><%=word.word%></li>

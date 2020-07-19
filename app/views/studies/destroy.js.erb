@@ -1,0 +1,7 @@
+//alert("you still do not remember this word -.-")
+document.getElementById('alert-message-from-server').innerHTML="you still do not remember this word -.-"
+document.getElementById('alert-message-from-server').className="text-center alert alert-danger"
+setTimeout(function(){
+  document.getElementById('alert-message-from-server').innerHTML=""
+  document.getElementById('alert-message-from-server').className=""
+},2000)

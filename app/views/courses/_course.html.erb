@@ -12,12 +12,12 @@
         <div class="card-body">
             <h5 class="card-title"><%= course.name %></h5>
             <p class="card-text"> Created at : <%= time_ago_in_words(course.created_at) %> ago.</p>
-            <%= link_to "Delete", course_delete_path(course_id: course.id), 
+            <%= link_to("Delete", course_delete_path(course_id: course.id), 
                 class:"btn btn-primary", 
                 data_toggle:"modal", 
                 data_target:"#confirmDelCourse", 
                 method: "delete", 
-                data: { confirm: 'Are you sure?' }%>
+                data: { confirm: 'Are you sure?' }) if current_user_by_params? %>
         </div>
     </div>
 </div>

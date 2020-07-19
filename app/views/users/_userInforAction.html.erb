@@ -1,0 +1,26 @@
+<div class="col-md-3 mt-4"> 
+        <div class="card">
+            <div class="card-header">
+                <%if @user.picture?%>
+                    <%= image_tag(@user.picture.url, class:"img-user")%>
+                <%else%>
+                    <%= image_tag("default_img.png", class:"img-user")%>
+                <%end%>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><%= @user.name %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <%=@user.courses.count%> created courses
+                    <%= link_to("create new course", new_course_path, 
+                    class: "btn btn-primary m-auto d-block") if current_user_by_params? %>
+                </li>
+                <li class="list-group-item">
+                  <a href="<%=studiedWords_user_path%>">
+                    <%=@study.where(user_id: @user.id).count%> studied Words
+                  </a>
+                </li>
+            </ul>
+        </div>        
+    </div>
