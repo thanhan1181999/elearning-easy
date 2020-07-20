@@ -1,0 +1,5 @@
+<%= form_for(Join.find_by(course_id: course.id), method: :delete , remote: true) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id%>
+  <%= f.hidden_field :course_id, value: course.id%>
+  <%= f.submit "UnJoin", class: "btn btn-primary" %>
+<% end %>

@@ -18,4 +18,5 @@ import "bootstrap"
 // const imagePath = (name) => images(name, true)
 // require("packs/textToSpeech")
 // require("packs/flashcard") 
+global.$ = jQuery
 

@@ -8,7 +8,7 @@ show all words in a lesson
 <%= link_to("test one", test1_lesson_path(@lesson), 
   class: "btn btn-primary") if @lesson.words.count >=7 %>
 <div class="lessonShowWord">
-  <%= render @words %>
+  <%= render @words || "have no word" %>
 </div>
 
 <%= javascript_pack_tag 'textToSpeech' %>

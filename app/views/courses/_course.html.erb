@@ -2,22 +2,33 @@
 <div id="course-<%= course.id %>" class="col-4 mb-3">
 
     <div class="card h-100">
-    <a href="<%= course_path(course.id)%>">
         <% if course.picture?%>
             <%= image_tag(course.picture.url, class: "card-img-top") %>
         <% elsif%>
             <%= image_tag("default_img.png", class: "card-img-top") %>
         <% end %>
-    </a>
+
         <div class="card-body">
             <h5 class="card-title"><%= course.name %></h5>
             <p class="card-text"> Created at : <%= time_ago_in_words(course.created_at) %> ago.</p>
+            
             <%= link_to("Delete", course_delete_path(course_id: course.id), 
                 class:"btn btn-primary", 
                 data_toggle:"modal", 
                 data_target:"#confirmDelCourse", 
                 method: "delete", 
                 data: { confirm: 'Are you sure?' }) if current_user_by_params? %>
+            
+            <div id="joinCourse-<%=course.id%>">
+            <%if (Join.find_by(course_id: course.id).blank?) %>
+                <%=render 'join', course: course %>
+            <%else%>
+                <%=render 'unjoin', course: course %>
+                <%= link_to("Study", course_path(course.id), class: "btn btn-primary") %>
+            <%end%>
+            </div>
+
+            
         </div>
     </div>
 </div>

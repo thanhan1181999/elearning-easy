@@ -9,7 +9,7 @@
     <% if @lessons.any? %>
         <div class="container-fluid">
             <div class="CourseShowLesson">
-                <%= render @lessons %> 
+                <%= render @lessons || "have no lesson"%> 
             </div>   
         </div>
     <% end %>

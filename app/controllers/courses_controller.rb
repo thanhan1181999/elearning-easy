@@ -26,7 +26,7 @@ class CoursesController < ApplicationController
     def destroy
         Course.find(params[:course_id]).destroy
         flash[:success] = "Course deleted"
-        redirect_to user_pathP current_user
+        redirect_to user_path current_user
     end
 
     private

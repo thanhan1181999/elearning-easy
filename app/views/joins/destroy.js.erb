@@ -1,0 +1,1 @@
+$("#joinCourse-<%=@course_id%>").html("<%= escape_javascript(render 'users/join', course: Course.find(@course_id)) %>"); 

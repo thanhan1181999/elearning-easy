@@ -37,4 +37,5 @@ Rails.application.routes.draw do
     end
   end
   resources :account_activations, only: [:edit]
+  resources :joins, only: [:create, :destroy]
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_161045) do
+ActiveRecord::Schema.define(version: 2020_07_20_064331) do
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -30,13 +30,14 @@ ActiveRecord::Schema.define(version: 2020_07_16_161045) do
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
-  create_table "follows", force: :cascade do |t|
+  create_table "joins", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_follows_on_course_id"
-    t.index ["user_id"], name: "index_follows_on_user_id"
+    t.index ["course_id"], name: "index_joins_on_course_id"
+    t.index ["user_id", "course_id", "created_at"], name: "index_joins_on_user_id_and_course_id_and_created_at"
+    t.index ["user_id"], name: "index_joins_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -88,8 +89,8 @@ ActiveRecord::Schema.define(version: 2020_07_16_161045) do
 
   add_foreign_key "courses", "course_categories"
   add_foreign_key "courses", "users"
-  add_foreign_key "follows", "courses"
-  add_foreign_key "follows", "users"
+  add_foreign_key "joins", "courses"
+  add_foreign_key "joins", "users"
   add_foreign_key "lessons", "courses"
   add_foreign_key "studies", "users"
   add_foreign_key "studies", "words"
