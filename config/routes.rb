@@ -31,6 +31,10 @@ Rails.application.routes.draw do
       resources :words, only: [:new]
     end
   end
-  resources :words
+  resources :words do
+    collection do
+      get :filter
+    end
+  end
   resources :account_activations, only: [:edit]
 end
