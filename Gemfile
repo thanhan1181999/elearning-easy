@@ -32,10 +32,16 @@ gem 'kaminari'
 gem 'ransack'     
 gem 'bootstrap4-kaminari-views'
 
-
+#upload anh
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
+
+#login mang xa hoi
+gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-facebook"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

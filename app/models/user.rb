@@ -17,6 +17,10 @@ class User < ApplicationRecord
     attr_accessor :remember_token, :activation_token
     mount_uploader :picture, PictureUploader
     
+    #authen social
+    devise :database_authenticatable, :registerable,
+        :omniauthable , omniauth_providers: [:facebook, :google_oauth2] 
+
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     before_save {self.email = email.downcase } # hoặc sử dụng email.downcase!
 
@@ -66,6 +70,25 @@ class User < ApplicationRecord
     # Returns true if the current user is following the other user.
     def following?(other_user) 
         following.include?(other_user)
+    end
+
+    def self.from_omniauth(auth)
+        result = User.find_by email: auth.info.email, 
+        provider: auth.provider,
+        uid: auth.uid
+
+        if result.blank?
+            where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+                user.email = auth.info.email
+                user.password = Devise.friendly_token[0,20]
+                user.name = auth.info.name
+                user.image = auth.info.image
+                user.uid = auth.uid
+                user.provider = auth.provider
+            end
+            user =User.find_by(uid:user.uid) 
+        end
+        return result
     end
 
 end

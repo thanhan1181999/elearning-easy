@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'studies/create'
   get 'studies/destroy'
   root 'static_pages#home'
@@ -44,4 +45,7 @@ Rails.application.routes.draw do
   resources :joins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   
+  devise_for :users,
+  path: '',
+  controllers: {omniauth_callbacks: 'omniauth_callbacks' }
 end

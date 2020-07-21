@@ -12,6 +12,10 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <div class="container-fluid">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
     <div style="position: absolute;top: 65px;left:0; right:0">
       <div class="container-fluid">
         <% flash.each do |message_type, message| %>
