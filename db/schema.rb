@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_20_064331) do
+ActiveRecord::Schema.define(version: 2020_07_21_013535) do
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2020_07_20_064331) do
     t.integer "word_id", null: false
     t.index ["lesson_id", "word_id"], name: "index_lessons_words_on_lesson_id_and_word_id"
     t.index ["word_id", "lesson_id"], name: "index_lessons_words_on_word_id_and_lesson_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "studies", force: :cascade do |t|

@@ -28,6 +28,11 @@ gem "will_paginate"
 gem 'will_paginate-bootstrap4'
 gem 'bootstrap-sass'
 
+gem 'kaminari'       
+gem 'ransack'     
+gem 'bootstrap4-kaminari-views'
+
+
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'

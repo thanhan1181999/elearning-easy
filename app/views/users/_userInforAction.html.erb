@@ -9,18 +9,29 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title"><%= @user.name %></h5>
+                <div id="followInfor">
+                    <%=render 'followInfor'%>
+                </div>                
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <%=@user.courses.count%> created courses
                     <%= link_to("create new course", new_course_path, 
-                    class: "btn btn-primary m-auto d-block") if current_user_by_params? %>
+                    class: "btn btn-primary m-auto d-block") if current_user?(@user) %>
                 </li>
+               
                 <li class="list-group-item">
-                  <a href="<%=studiedWords_user_path%>">
-                    <%=@study.where(user_id: @user.id).count%> studied Words
+                    <a href="<%=studiedWords_user_path%>">
+                    <%=@studys.count%> studied Words
+                    </a>
+                </li>
+
+                <li class="list-group-item">
+                  <a href="<%=joinedCourses_user_path%>">
+                    <%=@joins.count%> joined courses
                   </a>
                 </li>
+               
             </ul>
         </div>        
     </div>

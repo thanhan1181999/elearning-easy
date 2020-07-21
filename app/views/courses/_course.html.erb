@@ -1,4 +1,4 @@
-
+<%@course = course %>
 <div id="course-<%= course.id %>" class="col-4 mb-3">
 
     <div class="card h-100">
@@ -21,9 +21,9 @@
             
             <div id="joinCourse-<%=course.id%>">
             <%if (Join.find_by(course_id: course.id).blank?) %>
-                <%=render 'join', course: course %>
+                <%=render 'join'%>
             <%else%>
-                <%=render 'unjoin', course: course %>
+                <%=render 'unjoin'%>
                 <%= link_to("Study", course_path(course.id), class: "btn btn-primary") %>
             <%end%>
             </div>
@@ -32,9 +32,6 @@
         </div>
     </div>
 </div>
-<script>
-
-</script>
 
 
  

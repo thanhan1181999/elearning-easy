@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :studiedWords
+      get :studiedWords, :joinedCourses, :following, :followers 
       resources :courses, only: [:new]
     end
   end
@@ -25,17 +25,23 @@ Rails.application.routes.draw do
   resources :studies, only: [:create, :destroy]
 
   resources :courses
+
   resources :lessons do
     member do
       get :flashcard, :test1
       resources :words, only: [:new]
     end
   end
+
   resources :words do
     collection do
       get :filter
+      post :importFromFile
     end
   end
+
   resources :account_activations, only: [:edit]
   resources :joins, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
+  
 end

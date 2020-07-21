@@ -25,7 +25,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @courses = @user.courses.paginate(page: params[:page], per_page: 6)
-    @study = Study.where("user_id=?", params[:id])
+    @studys = Study.where("user_id=?", params[:id])
+    @joins = Join.where("user_id=?", params[:id])
   end
   
   # get form to update
@@ -55,6 +56,31 @@ class UsersController < ApplicationController
     @studys = Study.where(user_id: params[:id])
   end
 
+  def joinedCourses
+    @courses = Join.where("user_id=?", params[:id])
+    .map do |join|
+      Course.find_by(id: join.course.id)
+    end
+  end
+
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users =@user.following.paginate(page: params[:page])
+    @studys = Study.where("user_id=?", params[:id])
+    @joins = Join.where("user_id=?", params[:id])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    @studys = Study.where("user_id=?", params[:id])
+    @joins = Join.where("user_id=?", params[:id])
+    render 'show_follow'
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :picture)
@@ -72,11 +98,4 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user.admin?
     end
 
-    def logged_in_user
-      store_location #in session helper
-      unless logged_in?
-        flash[:danger] = "Please log in."
-        redirect_to login_path
-      end
-  end
 end

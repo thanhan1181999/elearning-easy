@@ -1,0 +1,17 @@
+                <a href="<%= following_user_path(@user) %>" >
+                    <h5>following <span class="badge badge-secondary">
+                        <%=@user.following.count%>
+                    </span></h5>
+                </a>
+                <a href="<%= followers_user_path(@user) %>" >
+                    <h5>followed <span class="badge badge-secondary">
+                        <%=@user.followers.count%>
+                    </span></h5>
+                </a>
+                <% unless current_user?(@user) %>
+                    <%if current_user.following?(@user)%>
+                        <%=render 'relationships/unfollow'%>
+                    <%else%>
+                        <%=render 'relationships/follow'%>
+                    <%end%>
+                <%end%>

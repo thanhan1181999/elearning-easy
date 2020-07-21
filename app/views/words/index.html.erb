@@ -8,11 +8,17 @@
   <%= submit_tag "filter" %>
 <% end %>
 
+<%=form_tag importFromFile_words_path, multipart: true do%>
+  <%=file_field_tag :file%>
+  <%=submit_tag "Import", class: "btn btn-primary"%>
+<%end%>
+
 <div class="lessonShowWord">
   <%= render @words %>
 </div>
+
 <div style="margin: 10px auto">
-  <%=will_paginate%>  
+  <%=paginate @words,theme: 'twitter-bootstrap-4' %>  
 </div>
 
 <%= javascript_pack_tag 'textToSpeech'%>

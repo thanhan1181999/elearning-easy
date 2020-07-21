@@ -1,0 +1,4 @@
+<%@courses.each do |course|%>
+  <%=link_to course.name, course_path(course.id) %>
+<%end%>
+<%="No course" if @courses.blank? %>

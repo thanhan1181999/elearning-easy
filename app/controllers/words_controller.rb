@@ -6,7 +6,7 @@ class WordsController < ApplicationController
       sort = params[:sort]
       type = params[:type]
       stateWord = params[:stateWord]
-        @words = Word.order('word '+sort)
+        @words_array = Word.order('word '+sort)
         .select do |word| 
           if type=="0" 
             true 
@@ -25,9 +25,10 @@ class WordsController < ApplicationController
               has == 0
           end
         end
-        .paginate(page: params[:page], per_page: 6)
+        @words = Kaminari.paginate_array(@words_array).page(params[:page]).per(5)
     else
-      @words = Word.paginate(page: params[:page], per_page: 6)
+      @words_array = Word.all.to_a
+      @words = Kaminari.paginate_array(@words_array).page(params[:page]).per(5)
     end
   end
 
@@ -44,6 +45,25 @@ class WordsController < ApplicationController
       render 'new'
     end
   end
+
+  def importFromFile
+    size = File.readlines(params[:file]).size
+    i=0
+    
+    File.open(params[:file],"r") do |line|
+      while (i<=size) do
+        content = line
+      end
+
+      while(content = line.gets) != nil
+        if content.start_with?("@")
+          word = content;
+
+        end
+      end
+    end
+  end
+
   private
     def word_param
       params.require(:word).permit(:word, :picture, :meaning)

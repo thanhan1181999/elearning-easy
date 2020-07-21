@@ -1,11 +1,12 @@
 <% provide(:title, @user.name) %> 
 <% 
-if current_user_by_params? 
+if current_user?(@user) 
     nameOfCreatedCourse = "Your Course"
 else
     nameOfCreatedCourse = @user.name + "'s Course"
 end
 %>
+
 <div class="row">
     <%= render 'userInforAction'%>
 

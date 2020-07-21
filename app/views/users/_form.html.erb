@@ -1,4 +1,14 @@
 <%= form_for(@user) do |f| %>
+    <%if @user.picture?%>
+      <%= image_tag(@user.picture.url, class:"img-user img-thumbnail", id: 'img_prev')%>
+    <%else%>
+      <%= image_tag("default_img.png", class:"img-user img-thumbnail", id: 'img_prev')%>
+    <%end%>
+    <%= f.label :picture %>
+      <%= f.file_field :picture, 
+      accept:  'image/jpeg,image/gif,image/png', 
+      class: 'form-control mb-2 photo_upload'%> 
+    
     <%= render 'shared/error_messages', object: f.object %>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
@@ -9,9 +19,22 @@
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, class: 'form-control'
     %>
-    <%= f.label :picture %>
-    <%= f.file_field :picture, 
-      accept:  'image/jpeg,image/gif,image/png', 
-      class: 'form-control mb-2' %> 
     <%= f.submit yield(:button_text), class: "btn btn-primary mx-auto m-auto d-block" %>
 <% end %>
+<!-- Assume jQuery is loaded -->
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#img_prev').attr('src', e.target.result)
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $(".photo_upload").change(function(){
+    readURL(this);
+  });
+</script>

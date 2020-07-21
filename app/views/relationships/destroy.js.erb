@@ -1,0 +1,3 @@
+//alert("delete success")
+$('#followInfor').html("<%=escape_javascript(render('users/followInfor')) %>")
+console.log("have <%=@user.followers.count %> person following you")
