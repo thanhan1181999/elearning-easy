@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_21_164048) do
+ActiveRecord::Schema.define(version: 2020_07_22_065414) do
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2020_07_21_164048) do
     t.string "provider"
     t.string "uid"
     t.string "image"
+    t.boolean "isAdmin", default: false
   end
 
   create_table "words", force: :cascade do |t|

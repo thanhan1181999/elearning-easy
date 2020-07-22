@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   delete '/course/delete', to: 'courses#destroy'
-
+  
   resources :users do
     member do
       get :studiedWords, :joinedCourses, :following, :followers 

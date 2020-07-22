@@ -33,4 +33,5 @@ class CoursesController < ApplicationController
         def course_params 
             params.require(:course).permit(:content, :picture, :course_category_id, :name)
         end
+
 end

@@ -10,6 +10,7 @@ User.create!(name: "thanhan",
     password: "123456", 
     password_confirmation: "123456",
     activated: true,
+    isAdmin: true,
     activated_at: Time.zone.now)
 User.create!(name: "thuthuy",
     email: "thuthuy@gmail.com",
@@ -22,16 +23,16 @@ User.create!(name: "thuthuy",
 CourseCategory.create!(name: "English")
 CourseCategory.create!(name: "Japanese")
 # #add user
-# 10.times do |n|
-#     name = Faker::Name.name
-#     email = "example-#{n+1}@gmail.com" 
-#     password = "123456"
-#     User.create!(name: name,
-#         email: email,
-#         password: password, password_confirmation: password,
-#         activated: true,
-#         activated_at: Time.zone.now)
-# end
+10.times do |n|
+    name = Faker::Name.name
+    email = "example-#{n+1}@gmail.com" 
+    password = "123456"
+    User.create!(name: name,
+        email: email,
+        password: password, password_confirmation: password,
+        activated: true,
+        activated_at: Time.zone.now)
+end
 # #add course
 en= CourseCategory.find(1)
 jp= CourseCategory.find(2)

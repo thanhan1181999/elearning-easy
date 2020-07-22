@@ -1,0 +1,3 @@
+<a href="<%=joinedCourses_user_path @user %>" >
+  <%=Join.where("user_id=?",@user.id).count%> joined courses
+</a>

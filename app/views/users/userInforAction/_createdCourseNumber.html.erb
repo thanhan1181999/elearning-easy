@@ -1,0 +1,2 @@
+<%=@user.courses.count%> created courses
+<%= link_to("create new course", new_course_path, class: "btn btn-primary m-auto d-block") if current_user?(@user) %>

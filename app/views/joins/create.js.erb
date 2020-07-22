@@ -1,1 +1,2 @@
-$("#joinCourse-<%=@course_id%>").html("<%= escape_javascript(render 'users/unjoin', course: Course.find(@course_id)) %>"); 
+$("#joinCourse-<%=@course.id%>").html("<%= escape_javascript(render 'users/unjoin', course: @Course) %>"); 
+//$('#joinedCoursesNumber').html("<%= escape_javascript(render 'users/userInforAction/joinedCoursesNumber', user: @user ) %>")
