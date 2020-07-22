@@ -1,11 +1,7 @@
 <div class="col-md-3 mt-4"> 
         <div class="card">
             <div class="card-header">
-                <%if @user.picture?%>
-                    <%= image_tag(@user.picture.url, class:"img-user")%>
-                <%else%>
-                    <%= image_tag("default_img.png", class:"img-user")%>
-                <%end%>
+                    <%= image_tag(avatar_url(@user), class:"img-user")%>
             </div>
             <div class="card-body">
                 <h5 class="card-title"><%= @user.name %></h5>

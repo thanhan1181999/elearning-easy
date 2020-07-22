@@ -18,8 +18,7 @@ class User < ApplicationRecord
     mount_uploader :picture, PictureUploader
     
     #authen social
-    devise :database_authenticatable, :registerable,
-        :omniauthable , omniauth_providers: [:facebook, :google_oauth2] 
+    devise :omniauthable , omniauth_providers: [:facebook, :google_oauth2] 
 
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     before_save {self.email = email.downcase } # hoặc sử dụng email.downcase!
@@ -30,7 +29,7 @@ class User < ApplicationRecord
                 :uniqueness => {:case_sensitive => false}
     has_secure_password
     validates :password, presence: true, length: {minimum:6}, allow_blank: true
-
+    
     def User.digest(string)
         cost =  cost = ActiveModel::SecurePassword.min_cost ? 
             BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -73,22 +72,17 @@ class User < ApplicationRecord
     end
 
     def self.from_omniauth(auth)
-        result = User.find_by email: auth.info.email, 
-        provider: auth.provider,
-        uid: auth.uid
-
-        if result.blank?
-            where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-                user.email = auth.info.email
-                user.password = Devise.friendly_token[0,20]
-                user.name = auth.info.name
-                user.image = auth.info.image
-                user.uid = auth.uid
-                user.provider = auth.provider
-            end
-            user =User.find_by(uid:user.uid) 
-        end
-        return result
+        random = Devise.friendly_token[0,20]
+        User.where(provider: auth.provider, uid: auth.uid).first_or_create(
+            email: auth.info.email,
+            password: random,
+            password_confirmation: random,
+            name: auth.info.name,
+            uid: auth.uid,
+            provider: auth.provider,
+            image: auth.info.image,
+            activated: true,
+            activated_at: Time.zone.now)
     end
 
 end
