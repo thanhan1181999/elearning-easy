@@ -24,7 +24,11 @@ class UsersController < ApplicationController
   # get user/id
   def show
     @user = User.find(params[:id])
-    @courses = @user.courses.paginate(page: params[:page], per_page: 6)
+    if current_user.id == params[:id].to_i
+      @courses = Course.where(user_id: current_user.following.ids).paginate(page: params[:page], per_page: 6)
+    else
+      @courses = @user.courses.paginate(page: params[:page], per_page: 6)
+    end
     @studys = Study.where("user_id=?", params[:id])
     @joins = Join.where("user_id=?", params[:id])
   end
@@ -61,6 +65,11 @@ class UsersController < ApplicationController
     .map do |join|
       Course.find_by(id: join.course.id)
     end
+  end
+
+  def createdCourses
+    @courses = Course.where(user_id: params[:id])
+    render 'users/joinedCourses'
   end
 
   def following

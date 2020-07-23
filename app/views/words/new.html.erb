@@ -1,10 +1,29 @@
-create a new word
-<%=form_for(@word, html:{multipart:true}) do |f|%>
-  <%= render 'shared/error_messages', object: f.object %> 
-  <%= f.text_area :word, placeholder: "word" %>
-  <%= f.text_area :meaning, placeholder: "meaning" %>
-  <%= f.text_area :lesson_id, value: params[:id], style: "display:none" %>
-  <%= f.file_field :picture, accept:  'image/jpeg,image/gif,image/png' %> 
-  <%= f.submit "Post", class: "btn btn-primary" %> 
+<h3 style="text-align:center; padding:20px">Create a new word in course</h3>
+<div class="container" style="max-width:700px">
+<%=form_for(@word, html:{multipart:true}, class:"form-group") do |f|%>
+   <%= render 'shared/error_messages', object: f.object %> 
+
+    <div class="form-row">
+      <div class="col">
+        <%= f.text_area :word, placeholder: "word", class:"form-control", style:"height:50px"%>
+      </div>
+      <div class="col">
+          <%= f.text_area :meaning, placeholder: "meaning", class:"form-control", style:"height:50px"%>
+      </div>
+    </div>
+    
+    <div class="m-3">
+      <%= f.label :picture, class:"mr-2"%>
+      <%= f.file_field :picture, accept:  'image/jpeg,image/gif,image/png'%> 
+    </div>
+
+    <%= f.text_area :course_category_id, 
+    value: Lesson.where(id: params[:id])[0].course.course_category.id ,style: "display:none", class:"form-control" %>
+
+    <%= f.text_area :lesson_id, value: params[:id], style: "display:none", class:"form-control" %>
+
+    <%= f.submit "Add word", class: "btn btn-primary m-auto d-block" %> 
 <% end %>
+</div>
+
 

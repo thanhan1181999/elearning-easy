@@ -1,11 +1,20 @@
-<%= form_for(@course, html: { multipart: true }) do |f| %>
+<h3 style="text-align:center; padding:20px">Create a new course</h3>
+<div class="container" style="max-width:700px">
+<%= form_for(@course, html: { multipart: true }, class:"form-group" ) do |f| %>
     <%= render 'shared/error_messages', object: f.object %> 
-    <div class="field">
-        <%= f.text_area :name, placeholder: "name of course..." %>
+
+    <%= f.text_area :name, placeholder: "name of course...", class:"form-control", style:"height:50px"%>
+    
+    
+    <div class="form-row mt-3 mb-3">
+      <div class="col d-flex justify-content-center align-items-center">
+        <%= f.file_field :picture, accept:  'image/jpeg,image/gif,image/png', class:"form-control"%> 
+      </div>
+      <div class="col d-flex justify-content-center align-items-center">
+          <%=select("course", "course_category_id", @courseCategory.all.collect {|p| [ p.name, p.id ]}, {}, {class: "form-control"})%>
+      </div>
     </div>
-    <span class="picture">
-        <%= f.file_field :picture, accept:  'image/jpeg,image/gif,image/png' %> 
-    </span>
-    <%=select("course", "course_category_id", @courseCategory.all.collect {|p| [ p.name, p.id ] })%>
-    <%= f.submit "Post", class: "btn btn-primary" %> 
+
+    <%= f.submit "Add course", class: "btn btn-primary m-auto d-block" %> 
 <% end %>
+</div>

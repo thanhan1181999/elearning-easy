@@ -2,6 +2,8 @@ class User < ApplicationRecord
     has_many :courses, dependent: :destroy
     has_many :studies, dependent: :destroy
     has_many :joins, dependent: :destroy
+
+
     #user have many active_relationships assosiation with table Relationship
     #(have many record like [this user id (follower_id), id of followed user id]) in table Relationship
     # following is collection representative for active_relationships assosiation

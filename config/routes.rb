@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   resources :users do
     member do
-      get :studiedWords, :joinedCourses, :following, :followers 
+      get :studiedWords, :joinedCourses, :following, :followers, :createdCourses
     end
     resources :courses, only: [:new]
   end

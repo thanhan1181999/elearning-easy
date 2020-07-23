@@ -1,17 +1,37 @@
-<%= form_tag words_path, method: :get do %>
-  <%=select_tag "sort", options_for_select([["ascending","ASC"],["descending","DESC"]])%>
-  <%=select_tag "type", 
-  options_for_select(CourseCategory.all.collect{|p| [ p.name, p.id ] }<< ["all type",0],["all type",0])
-  %>
-  <%=select_tag "stateWord", 
-    options_for_select([["all",0],["remembered",1],["not learn",2]])%>
-  <%= submit_tag "filter" %>
-<% end %>
 
-<%=form_tag importFromFile_words_path, multipart: true do%>
-  <%=file_field_tag :file%>
-  <%=submit_tag "Import", class: "btn btn-primary"%>
-<%end%>
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex justify-content-center align-items-center">
+      <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Filter
+      </a>
+      <a class="btn btn-primary" data-toggle="collapse" href="#collapse-import-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Import word
+      </a>
+    </div>
+    <div class="collapse" id="collapse-import-word">
+      <div class="card card-body">
+        <%=form_tag importFromFile_words_path, multipart: true do %>
+          <%=file_field_tag :file, class:"btn border-primary"%>
+          <%=select("","course_category_id", CourseCategory.all.collect{|p| [p.name,p.id]},{}, class:"btn border-primary")%>
+          <%=submit_tag "Import", class: "btn btn-primary"%>
+        <%end%>
+      </div>
+    </div>
+    <div class="collapse" id="collapse-filter-word">
+      <div class="card card-body">
+          <%= form_tag words_path, method: :get, class:"d-flex justify-content-center align-items-center" do %>
+            <%=select_tag "sort", options_for_select([["ascending","ASC"],["descending","DESC"]]), class:"btn border-primary"%>
+            <%=select_tag "type", 
+            options_for_select(CourseCategory.all.collect{|p| [ p.name, p.id ] }<< ["all type",0],["all type",0]),
+            class:"btn border-primary"
+            %>
+            <%=select_tag "stateWord", 
+              options_for_select([["all",0],["remembered",1],["not learn",2]]), class:"btn border-primary"%>
+            <%= submit_tag "filter", class:"btn btn-primary" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
 
 <div class="lessonShowWord">
   <%= render @words %>

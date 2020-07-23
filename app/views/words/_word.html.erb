@@ -1,4 +1,6 @@
-<%language=word.lessons[0].course.course_category.name%>
+<%
+  language= word.lessons.present? ? word.lessons[0].course.course_category.name : "English"
+%>
 <%unless request.url.include? "flashcard"%>
 <div>
   <div><%=word.word%></div>

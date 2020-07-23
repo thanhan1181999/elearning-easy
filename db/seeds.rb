@@ -53,19 +53,19 @@ end
 
 user1.courses[0].lessons.create!(name: "greeting", picture: "download.png")
 @lesson = user1.courses[0].lessons[0]
-@word = Word.new(word: "hello",meaning:"xin chao",picture:"default_img.png")
+@word = Word.new(word: "hello",meaning:"xin chao",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word
-@word1 = Word.new(word: "nice to meet you",meaning:"rat vui duoc gap",picture:"default_img.png")
+@word1 = Word.new(word: "nice to meet you",meaning:"rat vui duoc gap",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word1
-@word2 = Word.new(word: "see you again",meaning:"hen gap lai",picture:"default_img.png")
+@word2 = Word.new(word: "see you again",meaning:"hen gap lai",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word2
-@word3 = Word.new(word: "happy",meaning:"vui mung",picture:"default_img.png")
+@word3 = Word.new(word: "happy",meaning:"vui mung",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word3
-@word4 = Word.new(word: "speak",meaning:"noi",picture:"default_img.png")
+@word4 = Word.new(word: "speak",meaning:"noi",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word4
-@word5 = Word.new(word: "run",meaning:"chay",picture:"default_img.png")
+@word5 = Word.new(word: "run",meaning:"chay",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word5
-@word6 = Word.new(word: "fly",meaning:"bay",picture:"default_img.png")
+@word6 = Word.new(word: "fly",meaning:"bay",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word6
 # User.find(1).courses[0].lessons[0].words.create!(word: "hello",meaning: "xin chao")
 # User.find(1).courses[0].lessons.create!(name: "love and happy")

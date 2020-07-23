@@ -1,7 +1,6 @@
-<% provide(:title, @user.name) %> 
 <% 
 if current_user?(@user) 
-    nameOfCreatedCourse = "Your Course"
+    nameOfCreatedCourse = "Course of your following people"
 else
     nameOfCreatedCourse = @user.name + "'s Course"
 end
@@ -11,18 +10,13 @@ end
     <%= render 'userInforAction'%>
 
     <div class="col-md-9">
-    <% if @user.courses.any? %>
-        
-        <h3><%=nameOfCreatedCourse%> : <%= @user.courses.count %></h3>
-      
+        <h3 style="text-align: center; margin: 20px;"><%=nameOfCreatedCourse%></h3>
         <div class="container-fluid">
             <div class="row">
                 <%= render @courses || "have no course" %>
             </div>
         </div>
-
-        <%= will_paginate @courses, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer %>
-    <% end %>
+        <%= will_paginate @courses, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer %> 
     </div>
 </div>
 

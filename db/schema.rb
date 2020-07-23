@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_065414) do
+ActiveRecord::Schema.define(version: 2020_07_23_033217) do
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -99,6 +99,8 @@ ActiveRecord::Schema.define(version: 2020_07_22_065414) do
     t.string "picture"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "course_category_id", null: false
+    t.index ["course_category_id"], name: "index_words_on_course_category_id"
   end
 
   add_foreign_key "courses", "course_categories"
@@ -108,4 +110,5 @@ ActiveRecord::Schema.define(version: 2020_07_22_065414) do
   add_foreign_key "lessons", "courses"
   add_foreign_key "studies", "users"
   add_foreign_key "studies", "words"
+  add_foreign_key "words", "course_categories"
 end
