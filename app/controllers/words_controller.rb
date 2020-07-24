@@ -8,7 +8,7 @@ class WordsController < ApplicationController
       stateWord = params[:stateWord]
       @words_array = Word.filterOrder(sort)
       .filterType(type)
-      .filterStateWord(stateWord,session[:user_id])
+      .filterStateWord(stateWord,current_user.id)
       @words = Kaminari.paginate_array(@words_array).page(params[:page]).per(10)
     else
       @words_array = Word.all.to_a
@@ -40,22 +40,34 @@ def importFromFile
         content = line.gets || ""
         if (content.start_with?('@'))
           word={}
-          word[:word]=content[1..content.length-2]
-          line.gets
-          meaning = line.gets
-          word[:meaning]=meaning[2..meaning.length-2]
+
+          if content.include?(" /")
+            word[:word]=content[1..content.index(" /")-1]
+          else 
+            word[:word]=content[1..content.length-2]
+          end
+
+          loop do
+            meaning = line.gets
+            $i+=1
+            if meaning.starts_with?("-")
+              word[:meaning]=meaning[1..meaning.length-2]
+              break
+            end
+          end
           word[:created_at] = Time.now
           word[:updated_at] = Time.now
           word[:course_category_id] = params[:course_category_id]
           $words << word
-          $i+=3
           next
         end
         $i+=1
       end   
   end
+  
   result = Word.insert_all($words)
   puts result
+  puts $words
   flash[:success] = "Import word from file success !!"
   redirect_to words_path
 end
