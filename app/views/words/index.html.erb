@@ -1,13 +1,19 @@
 
   <div class="d-flex flex-column justify-content-center align-items-center">
+
     <div class="d-flex justify-content-center align-items-center">
-      <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Filter
-      </a>
-      <a class="btn btn-primary" data-toggle="collapse" href="#collapse-import-word" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Import word
-      </a>
+      <%if logged_in? %>
+        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Filter
+        </a>
+        <%if isAdmin?%>
+          <a class="btn btn-primary" data-toggle="collapse" href="#collapse-import-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Import word
+          </a>
+        <%end%>
+      <%end%>
     </div>
+
     <div class="collapse" id="collapse-import-word">
       <div class="card card-body">
         <%=form_tag importFromFile_words_path, multipart: true do %>
@@ -17,6 +23,7 @@
         <%end%>
       </div>
     </div>
+
     <div class="collapse" id="collapse-filter-word">
       <div class="card card-body">
           <%= form_tag words_path, method: :get, class:"d-flex justify-content-center align-items-center" do %>
@@ -31,6 +38,7 @@
           <% end %>
       </div>
     </div>
+
   </div>
 
 <div class="lessonShowWord">

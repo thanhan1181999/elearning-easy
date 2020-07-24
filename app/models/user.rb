@@ -16,7 +16,7 @@ class User < ApplicationRecord
         foreign_key: "followed_id", dependent: :destroy
     has_many :followers, through: :passive_relationships, source: :follower
 
-    attr_accessor :remember_token, :activation_token
+    attr_accessor :remember_token, :activation_token, :reset_token
     before_save {self.email = email.downcase } # hoặc sử dụng email.downcase!
     before_create :create_activation_digest
 
@@ -56,6 +56,16 @@ class User < ApplicationRecord
         self.activation_digest = User.digest(activation_token)
     end
 
+    def create_reset_digest  
+        self.reset_token = User.new_token
+        update_attribute(:reset_digest, User.digest(reset_token))
+        update_attribute(:reset_sent_at, Time.zone.now)
+    end
+
+    # Sends password reset email.
+    def send_password_reset_email 
+        UserMailer.password_reset(self).deliver_now
+    end
     # Returns true if the given token matches the digest.
     # def authenticated?(remember_token)
     #     return false if remember_digest.nil?
@@ -97,7 +107,7 @@ class User < ApplicationRecord
     def following?(other_user) 
         following.include?(other_user)
     end
-
+    
     def self.from_omniauth(auth)
         random = Devise.friendly_token[0,20]
         User.where(provider: auth.provider, uid: auth.uid).first_or_create(
@@ -112,4 +122,8 @@ class User < ApplicationRecord
             activated_at: Time.zone.now)
     end
 
+    # Returns true if a password reset has expired.
+    def password_reset_expired? 
+        reset_sent_at < 2.hours.ago
+    end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_23_033217) do
+ActiveRecord::Schema.define(version: 2020_07_24_072125) do
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -91,6 +91,8 @@ ActiveRecord::Schema.define(version: 2020_07_23_033217) do
     t.string "uid"
     t.string "image"
     t.boolean "isAdmin", default: false
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   create_table "words", force: :cascade do |t|

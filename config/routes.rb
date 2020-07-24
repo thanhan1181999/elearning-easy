@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   root 'static_pages#home'
   
   get 'studies/create'
@@ -44,6 +46,8 @@ Rails.application.routes.draw do
 
   # active account by mails
   resources :account_activations, only: [:edit]
+  # reset password
+  resources :password_resets, only:[:new, :create, :edit, :update]
   
   resources :joins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
