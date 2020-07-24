@@ -4,9 +4,6 @@
   <%= image_tag(avatar_url(user),class:"img-user-small flex-grow-2")%>
   <%= link_to user.name, user, class:"flex-grow-2" %>
   <%if current_user.isAdmin? %>
-      <%=form_for user, method: :delete do |f|%>
-        <%= f.submit "Delete", class: "btn btn-danger", 
-        data: { confirm: "Are you sure delete user #{user.name} ?" } %>
-      <%end%>
+      <%= link_to "delete", user, method: :delete, data: {confirm: "Are you sure delete user #{user.name} ?" }, class: "btn btn-danger" unless current_user?(user)%>
   <% end %>
 </div>

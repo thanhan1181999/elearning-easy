@@ -74,8 +74,9 @@ module SessionsHelper
             flash[:danger] = "you need is admin"
             redirect_to users_path
             end
+        else
+            flash.now[:danger]="need login"
+            redirect_to root_path
         end
-        flash.now[:danger]="need login"
-        redirect_to root_path
       end
 end
