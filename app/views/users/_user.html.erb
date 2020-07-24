@@ -6,7 +6,7 @@
   <%if current_user.isAdmin? %>
       <%=form_for user, method: :delete do |f|%>
         <%= f.submit "Delete", class: "btn btn-danger", 
-        data: { confirm: 'Are you sure delete user #{user.name} ?' } %>
+        data: { confirm: "Are you sure delete user #{user.name} ?" } %>
       <%end%>
   <% end %>
 </div>
