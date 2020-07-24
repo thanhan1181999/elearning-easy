@@ -38,6 +38,20 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
+  host = 'https://language-easy.herokuapp.com' # Don't use this literally; use your local dev host
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+ 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com", 
+    :port => '587', 
+    :authentication => :plain,
+    :user_name=> "nguyenthanhan1181999@gmail.com",
+    :password => "wyuolegaskizofvw",
+    :enable_starttls_auto => true
+  }
+
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
@@ -109,5 +123,4 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  config.action_mailer.default_url_options = { host: 'https://language-easy.herokuapp.com/' }
 end

@@ -41,7 +41,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # active account by mails
   resources :account_activations, only: [:edit]
+  
   resources :joins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   

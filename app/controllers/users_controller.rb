@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :index]
   before_action :correct_user, only: [:edit, :update]
-
+  
   def index
     @users = User.paginate(page: params[:page],per_page: 8)
   end
@@ -13,10 +13,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params) # Not the final implementation!
     if @user.save
-      log_in @user
-      remember @user
-      flash[:success] = "Welcome to the Languafe easy!"
-      redirect_to @user
+      UserMailer.account_activation(@user).deliver_now
+      # log_in @user
+      # remember @user
+      # flash[:success] = "Welcome to the Languafe easy!"
+      # redirect_to @user
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
