@@ -97,17 +97,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :picture)
     end
-    # Confirms the correct user.
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
-    end
-    # Confirms the admin user.
-    def admin_user
-      unless current_user.isAdmin?
-        flash[:danger] = "only admin can delete user"
-        redirect_to users_path
-      end 
-    end
 
 end

@@ -1,4 +1,8 @@
 class WordsController < ApplicationController
+  before_action :logged_in_user, only: [:importFromFile]
+  before_action :admin_user, only: [:importFromFile]
+  before_action :logged_in_user, only: [:new, :create]
+  
   def index
     @courseCategory=CourseCategory.all
     
@@ -55,19 +59,19 @@ def importFromFile
               break
             end
           end
+
           word[:created_at] = Time.now
           word[:updated_at] = Time.now
           word[:course_category_id] = params[:course_category_id]
           $words << word
           next
+          
         end
         $i+=1
       end   
   end
-  
+
   result = Word.insert_all($words)
-  puts result
-  puts $words
   flash[:success] = "Import word from file success !!"
   redirect_to words_path
 end
