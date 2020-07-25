@@ -1,11 +1,9 @@
-import $ from 'jquery'
-import { lessonSpeaker } from './textToSpeech'
-import "bootstrap"
+import { textToSpeech } from './textToSpeech'
 
   function flashCardSpeaker(){
-    let language = $('.carousel div.active h2').attr('language');
-    let text = $('.carousel div.active h2').text();
-    lessonSpeaker(language,text);
+    let language = $('#carousel-flash-card div.active h2').attr('language')
+    let text = $('#carousel-flash-card div.active h2').text()
+    return textToSpeech(language,text)
   }
 
   //set value default for progress = 1
@@ -16,54 +14,48 @@ import "bootstrap"
   }  
 
   function createCarousel(interval){
-    // flashcard not auto run
-    $('.carousel').carousel({interval});
-
+    $('#carousel-flash-card').carousel({interval})
+    $('#carousel-flash-card').carousel('pause')
     // catch even of indecator
-    $('.carousel').on('slid.bs.carousel', function () {
-      // update state
-      //get position active
-      let pos = $('.carousel div.active').attr('position');
-      //update progress
+    $('#carousel-flash-card').on('slid.bs.carousel', function () {
+      //get position active to update progress
+      let pos = $('#carousel-flash-card div.active').attr('position');
       $('#pos-flashCard').text(pos+'')
       setStateProFlashCard(pos)
       //speaker
-      let language = $('.carousel div.active h2').attr('language');
-      let text = $('.carousel div.active h2').text();
-      lessonSpeaker(language,text);
+      flashCardSpeaker()();
     })
   }
-  
-  //default run auto 2000
-  createCarousel(2000)
-  $('.carousel-inner .carousel-item:first-child').addClass('active')
+
+$(document).ready(function(){
+  window.speechSynthesis.getVoices();
+  // constructor 
+  $('#carousel-flash-card .carousel-inner .carousel-item:first-child').addClass('active')
   setStateProFlashCard(1);
-  flashCardSpeaker();
-  $('.carousel-control-prev').addClass('fadeout');
-  $('.carousel-control-next').addClass('fadeout');
+  createCarousel(2000)
+  
   // change back and front of card
   $('.front-flashcard').click(function(){
     $('.front-flashcard').addClass('fadeout');
     $('.back-flashcard').removeClass('fadeout');
-    flashCardSpeaker();
+    flashCardSpeaker()();
   })
   $('.back-flashcard').click(function(){
     $('.back-flashcard').addClass('fadeout');
     $('.front-flashcard').removeClass('fadeout');
-    flashCardSpeaker();
+    flashCardSpeaker()();
   })
 
   //auto or paused
   $('#flashcard_paused').click(()=>{
-    $('.carousel').carousel('dispose')
-    createCarousel(0)
+    $('.carousel').carousel('pause')
     $('.carousel-control-prev').removeClass('fadeout');
     $('.carousel-control-next').removeClass('fadeout');
   })
   $('#flashcard_auto').click(()=>{
-    $('.carousel').carousel('dispose')
-    createCarousel(2000)
+    $('.carousel').carousel('cycle')
     $('.carousel-control-prev').addClass('fadeout');
     $('.carousel-control-next').addClass('fadeout');
   })
+})
 

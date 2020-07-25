@@ -1,19 +1,63 @@
-import $ from 'jquery'
-import { lessonSpeaker } from './textToSpeech'
-import 'bootstrap'
+import { textToSpeech } from './textToSpeech'
 
-//contructor
-let user_id = $('#current_user_id').text();
-let length = parseInt($('.carousel-inner .carousel-item:last-child').attr('position'))+1
-let currentrue = 0
-let currentfalse = 0
+$(document).ready(function(){
+  //contructor
+  let length = parseInt($('#carousel-test-1 .carousel-inner .carousel-item:last-child').attr('position'))+1
+  let currentrue = 0
+  let currentfalse = 0
+
+  function updateView(choiced){
+    $('#carousel-test-1 .true').addClass('bg-success')
+    if (checkAnswer(choiced)) { 
+      currentrue++
+    }
+    else {
+      currentfalse++
+      choiced.addClass('bg-danger')
+    }
+    $('#carousel-test-1 #current-true').text(currentrue+'');
+    $('#carousel-test-1 #current-false').text(currentfalse+'');
+    textToSpeech(getActiveWord().language,getActiveWord().word)()
+  }
+
+  //create carousel
+  $('#carousel-test-1').carousel()
+  $('#carousel-test-1').carousel('pause')
+  $('#carousel-test-1 #current-active').text((getActive())+'')
+  //when invoke next slide start , delete background-true-answer, user not see
+  $('#carousel-test-1').on('slide.bs.carousel', function () {
+    $('#carousel-test-1 .true').removeClass('bg-success');
+  })
+  //after next slide call completed, the acitve is correctly
+  $('#carousel-test-1').on('slid.bs.carousel', function () {
+    $('#carousel-test-1 #current-active').text((getActive())+'');
+  })
+
+  function viewResultByModal(){
+    $('#myModal').modal('show')
+    $('#myModal .modal-body').text(currentfalse +" false/ "+currentrue+" true ")
+  }
+  
+  //handle click
+  $('#carousel-test-1 .choices').click(function(){
+    updateView($(this));
+    updateDb($(this));
+    if(getActive()==length){
+      viewResultByModal()
+      return;
+    }
+    setTimeout(nextQuestion,2000);
+  })
+})
+
 function getActive(){
-  return parseInt($('.carousel-inner .active').attr('position'))+1
+  return parseInt($('#carousel-test-1 .carousel-inner .active').attr('position'))+1
 }
+
 function getActiveWord(){
-  let word=$('.carousel-inner .active .active-word').text();
-  let id=$('.carousel-inner .active .active-word').attr('id');
-  let language=$('.carousel-inner .active .active-word').attr('language')
+  let word=$('#carousel-test-1 .carousel-inner .active .active-word').text();
+  let id=$('#carousel-test-1 .carousel-inner .active .active-word').attr('id');
+  let language=$('#carousel-test-1 .carousel-inner .active .active-word').attr('language')
   return {language,word,id}
 }
 
@@ -22,31 +66,9 @@ function checkAnswer(choiced){
   return (answer.includes('true'))
 }
 
-function updateView(choiced){
-  $('#carouselTestControls .true').addClass('bg-success')
-  if (checkAnswer(choiced)) { 
-    currentrue++
-  }
-  else {
-    currentfalse++
-    choiced.addClass('bg-danger')
-  }
-  $('#carouselTestControls #current-true').text(currentrue+'');
-  $('#carouselTestControls #current-false').text(currentfalse+'');
-  lessonSpeaker(getActiveWord().language,getActiveWord().word)
-}
-//-------------
 function nextQuestion(){
-  $('#carouselTestControls').carousel('next')
+  $('#carousel-test-1').carousel('next')
 }
-//when invoke next slide start , delete background-true-answer, user not see
-$('#carouselTestControls').on('slide.bs.carousel', function () {
-  $('#carouselTestControls .true').removeClass('bg-success');
-})
-//after next slide call completed, the acitve is correctly
-$('#carouselTestControls').on('slid.bs.carousel', function () {
-  $('#carouselTestControls #current-active').text((getActive())+'');
-})
 
 function updateDb(choiced){
   $.ajaxSetup({
@@ -58,8 +80,8 @@ function updateDb(choiced){
   let url = checkAnswer(choiced) ? `/studies`: `/studies/delete`
   let data = {
     study:{
-      user_id,
-      word_id: getActiveWord().id
+      user_id : $('#current_user_id').text(),
+      word_id : getActiveWord().id
     }
   }
   $.ajax({
@@ -67,19 +89,7 @@ function updateDb(choiced){
   });
 }
 
-//handle click
-$('#carouselTestControls .choices').click(function(){
-  updateView($(this));
-  updateDb($(this));
-  if(getActive()==length){
-    alert(currentfalse +" false/ "+currentrue+" true ")
-    return;
-  }
-  setTimeout(nextQuestion,2000);
-})
 
-//create carousel
-$('#carouselTestControls').carousel()
-$('#carouselTestControls').carousel('pause')
-$('#carouselTestControls #current-active').text((getActive())+'')
+
+
 

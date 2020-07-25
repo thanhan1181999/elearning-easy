@@ -1,15 +1,6 @@
 <% @length = @words.length %>
 <% language=@words[0].lessons[0].course.course_category.name%>
-<div id="current_user_id"><%=session[:user_id]%></div>
-<%
-def answer(pos,randomArray)
-  arr=[]
-  randomArray.each do |element|
-    arr << (@words[pos].meaning==element)
-  end
-  arr
-end
-%>
+<div id="current_user_id" style="display:none"><%=session[:user_id]%></div>
 
 <% def randomArray(pos)
   @kq=[@words[pos].meaning]
@@ -24,11 +15,19 @@ end
 end
 %>
 
+<% def answer(pos,randomArray)
+  arr=[]
+  randomArray.each do |element|
+    arr << (@words[pos].meaning==element)
+  end
+  arr
+end
+%>
 
-<div id="carouselTestControls" class="p-4 carousel slide" 
+<div id="carousel-test-1" class="p-4 carousel slide" 
 style="max-width: 800px; margin: auto;">
 
-  <div id="alert-message-from-server" class="alert" style="height:50px"></div>
+  <div id="alert-message-from-server"></div>
   <div class="text-center mb-3">
     <div class="bg-info p-2 rounded d-inline">
       cau <span id="current-active">0</span>/<%=@length%>
@@ -69,19 +68,29 @@ style="max-width: 800px; margin: auto;">
           
           <div class="container">
             <div class="row">
-              <div class="<%=answer[0]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices" >
-                <%=choices[0]%>
-              </div>
-              <div class="<%=answer[1]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices">
-                <%=choices[1]%>
-              </div>
+                <div class="col-6" style="padding:0!important">
+                  <div class="<%=answer[0]%> cursor p-3 m-2 text-center bg-1 rounded choices" >
+                    <%=choices[0]%>
+                  </div>
+                </div>
+
+                <div class="col-6" style="padding:0!important">
+                  <div class="<%=answer[1]%> cursor p-3 m-2 text-center bg-1 rounded choices">
+                    <%=choices[1]%>
+                  </div>
+                </div>
             </div>
+
             <div class="row">
-              <div class="<%=answer[2]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices">
-                <%=choices[2]%>
+              <div class="col-6" style="padding:0!important">
+                <div class="<%=answer[2]%> cursor p-3 m-2 text-center bg-1 rounded choices">
+                  <%=choices[2]%>
+                </div>
               </div>
-              <div class="<%=answer[3]%> cursor col-sm p-3 m-2 text-center bg-1 rounded choices">
-                <%=choices[3]%>
+              <div class="col-6" style="padding:0!important">
+                <div class="<%=answer[3]%> cursor p-3 m-2 text-center bg-1 rounded choices">
+                  <%=choices[3]%>
+                </div>
               </div>
             </div>
 
@@ -95,4 +104,8 @@ style="max-width: 800px; margin: auto;">
   
 </div>
 
-<%= javascript_pack_tag 'test1' %>
+<%=render 'shared/modal'%>
+<script>
+  window.location.reload();
+</script>
+<!--<%= javascript_pack_tag 'test1' %>-->
