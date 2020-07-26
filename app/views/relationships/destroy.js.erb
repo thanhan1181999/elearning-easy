@@ -1,3 +1,4 @@
 //alert("delete success")
-$('#followInfor').html("<%=escape_javascript(render('users/followInfor')) %>")
+$('#js-follow-unfollow-form').html("<%=escape_javascript(render('relationships/follow')) %>")
 console.log("have <%=@user.followers.count %> person following you")
+$('#js-followed-num').html(<%=@user.followers.count %>)

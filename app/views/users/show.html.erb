@@ -9,14 +9,25 @@ end
 <div class="row">
     <%= render 'userInforAction'%>
 
-    <div class="col-md-9">
-        <h3 style="text-align: center; margin: 20px;"><%=nameOfCreatedCourse%></h3>
-        <div class="container-fluid">
-            <div class="row">
-                <%= render @courses || "have no course" %>
+    <div class="col-md-9 mt-1 pl-0">
+        <div class="card">
+            <h3 style="text-align: center; margin: 20px;"><%=nameOfCreatedCourse%></h3>
+            <div class="container-fluid">
+                    <%unless @courses.blank?%> 
+                        <div class="row">
+                            <%=render @courses%>
+                        </div>
+                    <%else%>
+                        <h4 class="text-center">have no course</h4>
+                    <%end%>
             </div>
-        </div>
-        <%= will_paginate @courses, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer %> 
+            <%= will_paginate @courses, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer %> 
+            <%if current_user?(@user)&& @courses.blank? %>
+                <div class="dropdown-divider"></div>
+                <h3 style="text-align: center; margin: 20px;">Start follow people</h3>
+                <%=render @users %>
+            <%end%>
+        </div>        
     </div>
 </div>
 

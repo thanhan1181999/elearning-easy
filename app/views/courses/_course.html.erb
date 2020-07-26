@@ -11,6 +11,7 @@
         <div class="card-body">
             <h5 class="card-title"><%= course.name %></h5>
             <p class="card-text"> Created at : <%= time_ago_in_words(course.created_at) %> ago.</p>
+            <%if %>
             <div class="d-flex">
             
                 <!--if is owner of course, show delete button-->

@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if current_user.id == params[:id].to_i
       @courses = Course.where(user_id: current_user.following.ids).paginate(page: params[:page], per_page: 6)
+      @users = User.where.not(id: current_user.id).limit(2) if @courses.blank?
     else
       @courses = @user.courses.paginate(page: params[:page], per_page: 6)
     end
