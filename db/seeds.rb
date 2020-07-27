@@ -76,26 +76,16 @@ user1.courses[0].lessons.create!(name: "greeting", picture: "download.png")
 @word10 = Word.new(word: "nervous",meaning:"lo lang",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word10
 
-Study.new(user_id: 1,word_id:1).save
-Study.new(user_id: 1,word_id:2).save
-Study.new(user_id: 1,word_id:3).save
-Study.new(user_id: 1,word_id:4).save
-Study.new(user_id: 1,word_id:5).save
-Study.new(user_id: 1,word_id:6).save
-Study.new(user_id: 1,word_id:7).save
-Study.new(user_id: 1,word_id:8).save
-Study.new(user_id: 1,word_id:9).save
-Study.new(user_id: 1,word_id:10).save
-
-Study.new(user_id: 2,word_id:1).save
-Study.new(user_id: 2,word_id:2).save
-Study.new(user_id: 2,word_id:3).save
-Study.new(user_id: 2,word_id:4).save
-Study.new(user_id: 2,word_id:5).save
-Study.new(user_id: 2,word_id:6).save
-Study.new(user_id: 2,word_id:7).save
-Study.new(user_id: 2,word_id:8).save
-Study.new(user_id: 2,word_id:9).save
+Study.new(user_id: 5,word_id:1).save
+Study.new(user_id: 5,word_id:2).save
+Study.new(user_id: 5,word_id:3).save
+Study.new(user_id: 5,word_id:4).save
+Study.new(user_id: 5,word_id:5).save
+Study.new(user_id: 5,word_id:6).save
+Study.new(user_id: 5,word_id:7).save
+Study.new(user_id: 5,word_id:8).save
+Study.new(user_id: 5,word_id:9).save
+Study.new(user_id: 5,word_id:10).save
 
 Study.new(user_id: 3,word_id:1).save
 Study.new(user_id: 3,word_id:2).save
@@ -105,14 +95,24 @@ Study.new(user_id: 3,word_id:5).save
 Study.new(user_id: 3,word_id:6).save
 Study.new(user_id: 3,word_id:7).save
 Study.new(user_id: 3,word_id:8).save
+Study.new(user_id: 3,word_id:9).save
 
-Study.new(user_id: 4,word_id:1).save
-Study.new(user_id: 4,word_id:2).save
-Study.new(user_id: 4,word_id:3).save
-Study.new(user_id: 4,word_id:4).save
-Study.new(user_id: 4,word_id:5).save
-Study.new(user_id: 4,word_id:6).save
-Study.new(user_id: 4,word_id:7).save
+Study.new(user_id: 6,word_id:1).save
+Study.new(user_id: 6,word_id:2).save
+Study.new(user_id: 6,word_id:3).save
+Study.new(user_id: 6,word_id:4).save
+Study.new(user_id: 6,word_id:5).save
+Study.new(user_id: 6,word_id:6).save
+Study.new(user_id: 6,word_id:7).save
+Study.new(user_id: 6,word_id:8).save
+
+Study.new(user_id: 7,word_id:1).save
+Study.new(user_id: 7,word_id:2).save
+Study.new(user_id: 7,word_id:3).save
+Study.new(user_id: 7,word_id:4).save
+Study.new(user_id: 7,word_id:5).save
+Study.new(user_id: 7,word_id:6).save
+Study.new(user_id: 7,word_id:7).save
 
 Study.new(user_id: 5,word_id:1).save
 Study.new(user_id: 5,word_id:2).save
@@ -121,16 +121,16 @@ Study.new(user_id: 5,word_id:4).save
 Study.new(user_id: 5,word_id:5).save
 Study.new(user_id: 5,word_id:6).save
 
-Study.new(user_id: 6,word_id:1).save
-Study.new(user_id: 6,word_id:2).save
-Study.new(user_id: 6,word_id:3).save
-Study.new(user_id: 6,word_id:4).save
-Study.new(user_id: 6,word_id:5).save
+Study.new(user_id: 4,word_id:1).save
+Study.new(user_id: 4,word_id:2).save
+Study.new(user_id: 4,word_id:3).save
+Study.new(user_id: 4,word_id:4).save
+Study.new(user_id: 4,word_id:5).save
 
-Study.new(user_id: 7,word_id:1).save
-Study.new(user_id: 7,word_id:2).save
-Study.new(user_id: 7,word_id:3).save
-Study.new(user_id: 7,word_id:4).save
+Study.new(user_id: 1,word_id:1).save
+Study.new(user_id: 1,word_id:2).save
+Study.new(user_id: 1,word_id:3).save
+Study.new(user_id: 1,word_id:4).save
 
 Study.new(user_id: 8,word_id:1).save
 Study.new(user_id: 8,word_id:2).save
@@ -139,7 +139,7 @@ Study.new(user_id: 8,word_id:3).save
 Study.new(user_id: 9,word_id:1).save
 Study.new(user_id: 9,word_id:2).save
 
-Study.new(user_id: 10,word_id:1).save
+Study.new(user_id: 2,word_id:1).save
 
 
 

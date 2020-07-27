@@ -1,12 +1,39 @@
+<% def colorOfRank(index) 
+   if index==0
+      'text-success'
+   elsif index==1
+      'text-warning' 
+   elsif index==2
+      'text-info'
+   else
+      'text-primary'
+   end
+end
+%>
 <div class="row">
    <div class="col-md-3">
-       <%@users.each do |user|%>
-          <div><%=user.name%></div>
-          <div><%=Study.where(user_id: user.id).count%> learned words</div>
-       <%end%>
+      <div class="border border-primary rounded p-1">
+         <h3 class="text-center mt-3 mb-3">Rank by studied Words</h3>
+         <%@users.each_with_index do |user,index|%>
+            <div class="m-1 home-ranking-item">
+               <div class="mr-2 rounded-circle <%=colorOfRank(index)%>" >
+                  <%==index+1%>
+               </div>
+               <div class="<%=colorOfRank(index)%>">
+                  <%=user.name%>
+               </div>
+               <div class=<%=colorOfRank(index)%>>
+                  <%=Study.where(user_id: user.id).count%>  words
+               </div>
+            </div>
+         <%end%>
+      </div>
     </div>
 
-    <div class="col-md-9">
-       
+    <div class="col-md-9 border border-primary rounded p-1">
+       <h3 class="text-center mt-3 mb-3">The most popular courses</h3>
+       <div class="row">
+         <%=render @courses %>
+       </div>
     </div>
 </div>
