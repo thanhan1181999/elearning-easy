@@ -65,8 +65,88 @@ user1.courses[0].lessons.create!(name: "greeting", picture: "download.png")
 @lesson.words << @word4
 @word5 = Word.new(word: "run",meaning:"chay",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word5
-@word6 = Word.new(word: "fly",meaning:"bay",picture:"default_img.png",course_category_id: en.id)
+@word6 = Word.new(word: "think",meaning:"suy nghi",picture:"default_img.png",course_category_id: en.id)
 @lesson.words << @word6
+@word7 = Word.new(word: "touch",meaning:"cham",picture:"default_img.png",course_category_id: en.id)
+@lesson.words << @word7
+@word8 = Word.new(word: "hurt",meaning:"dau",picture:"default_img.png",course_category_id: en.id)
+@lesson.words << @word8
+@word9 = Word.new(word: "confortable",meaning:"thoai mai",picture:"default_img.png",course_category_id: en.id)
+@lesson.words << @word9
+@word10 = Word.new(word: "nervous",meaning:"lo lang",picture:"default_img.png",course_category_id: en.id)
+@lesson.words << @word10
+
+Study.new(user_id: 1,word_id:1).save
+Study.new(user_id: 1,word_id:2).save
+Study.new(user_id: 1,word_id:3).save
+Study.new(user_id: 1,word_id:4).save
+Study.new(user_id: 1,word_id:5).save
+Study.new(user_id: 1,word_id:6).save
+Study.new(user_id: 1,word_id:7).save
+Study.new(user_id: 1,word_id:8).save
+Study.new(user_id: 1,word_id:9).save
+Study.new(user_id: 1,word_id:10).save
+
+Study.new(user_id: 2,word_id:1).save
+Study.new(user_id: 2,word_id:2).save
+Study.new(user_id: 2,word_id:3).save
+Study.new(user_id: 2,word_id:4).save
+Study.new(user_id: 2,word_id:5).save
+Study.new(user_id: 2,word_id:6).save
+Study.new(user_id: 2,word_id:7).save
+Study.new(user_id: 2,word_id:8).save
+Study.new(user_id: 2,word_id:9).save
+
+Study.new(user_id: 3,word_id:1).save
+Study.new(user_id: 3,word_id:2).save
+Study.new(user_id: 3,word_id:3).save
+Study.new(user_id: 3,word_id:4).save
+Study.new(user_id: 3,word_id:5).save
+Study.new(user_id: 3,word_id:6).save
+Study.new(user_id: 3,word_id:7).save
+Study.new(user_id: 3,word_id:8).save
+
+Study.new(user_id: 4,word_id:1).save
+Study.new(user_id: 4,word_id:2).save
+Study.new(user_id: 4,word_id:3).save
+Study.new(user_id: 4,word_id:4).save
+Study.new(user_id: 4,word_id:5).save
+Study.new(user_id: 4,word_id:6).save
+Study.new(user_id: 4,word_id:7).save
+
+Study.new(user_id: 5,word_id:1).save
+Study.new(user_id: 5,word_id:2).save
+Study.new(user_id: 5,word_id:3).save
+Study.new(user_id: 5,word_id:4).save
+Study.new(user_id: 5,word_id:5).save
+Study.new(user_id: 5,word_id:6).save
+
+Study.new(user_id: 6,word_id:1).save
+Study.new(user_id: 6,word_id:2).save
+Study.new(user_id: 6,word_id:3).save
+Study.new(user_id: 6,word_id:4).save
+Study.new(user_id: 6,word_id:5).save
+
+Study.new(user_id: 7,word_id:1).save
+Study.new(user_id: 7,word_id:2).save
+Study.new(user_id: 7,word_id:3).save
+Study.new(user_id: 7,word_id:4).save
+
+Study.new(user_id: 8,word_id:1).save
+Study.new(user_id: 8,word_id:2).save
+Study.new(user_id: 8,word_id:3).save
+
+Study.new(user_id: 9,word_id:1).save
+Study.new(user_id: 9,word_id:2).save
+
+Study.new(user_id: 10,word_id:1).save
+
+
+
+
+
+
+
 # User.find(1).courses[0].lessons[0].words.create!(word: "hello",meaning: "xin chao")
 # User.find(1).courses[0].lessons.create!(name: "love and happy")
 # User.find(1).courses[0].lessons[0].words << Word.create!(word: "register",meaning: "dang ki", picture: "download.png") 

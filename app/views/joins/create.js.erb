@@ -1,2 +1,3 @@
 $("#joinCourse-<%=@course.id%>").html("<%= escape_javascript(render 'users/unjoin', course: @Course) %>"); 
 //$('#joinedCoursesNumber').html("<%= escape_javascript(render 'users/userInforAction/joinedCoursesNumber', user: @user ) %>")
+$("#js-course-<%=@course.id%>-num-joined").html("<%= Join.where(course_id: @course.id).count %>")

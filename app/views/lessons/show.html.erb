@@ -1,18 +1,23 @@
-
+<%@course = Course.find(@lesson.course_id)%>
 <h3 style="text-align:center; padding:20px">Show all words in a lesson</h3>
-<div style="text-align:center; padding:0 0 20px 0">
-  <%= link_to("add a new word", 
-  new_word_path, 
-  class: "btn btn-primary") if current_user?(Lesson.find(params[:id]).course.user) %>
+ <div style="text-align:center; padding:0 0 20px 0">
+  <%if logged_in?%>
+    <%if isAdmin? || @lesson.course.user==current_user || Join.where("user_id=? AND course_id=?",current_user.id,@lesson.course_id).present?%>
+    
+        <%= link_to("add a new word", 
+        new_word_path, 
+        class: "btn btn-primary") if current_user?(Lesson.find(params[:id]).course.user) %>
+    <%end%>
+  <%end%>
   <%= link_to("flashCard", flashcard_lesson_path(@lesson), 
-  class: "btn btn-primary", data: {turbolinks:"false"}) if @lesson.words.count >=3 %>
+      class: "btn btn-primary", data: {turbolinks:"false"}) if @lesson.words.count >=3 %>
   <%= link_to("test one", test1_lesson_path(@lesson), 
-  class: "btn btn-primary", data: {turbolinks:"false"}) if @lesson.words.count >=7 %>
-</div>
-
-
+      class: "btn btn-primary", data: {turbolinks:"false"}) if @lesson.words.count >=7 %>
+ </div>
+  
 <div class="lessonShowWord">
   <%= render @words || "have no word" %>
 </div>
+
 <!--<%= javascript_pack_tag 'textToSpeech'%>-->
 

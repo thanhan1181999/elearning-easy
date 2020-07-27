@@ -1,4 +1,13 @@
-<%@courses.each do |course|%>
-  <%=link_to course.name, course_path(course.id) %>
+
+    <h2 class="text-center">
+      Your joined courses 
+    </h2>
+
+<div class="row">
+  <%= render @courses%>
+</div>
+<%if @courses.blank? %>
+  <h3 class="text-center">
+    No courses 
+  </h3>
 <%end%>
-<%="No course" if @courses.blank? %>

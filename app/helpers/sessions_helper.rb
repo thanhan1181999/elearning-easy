@@ -35,7 +35,7 @@ module SessionsHelper
         redirect_to root_path if logged_in?
     end
     def logged_in?
-        !current_user.nil?
+        !current_user.nil?  
     end
     def isAdmin?
         current_user.isAdmin?
@@ -76,7 +76,7 @@ module SessionsHelper
             end
         else
             flash.now[:danger]="need login"
-            redirect_to root_path
+            redirect_to login_path
         end
       end
 end

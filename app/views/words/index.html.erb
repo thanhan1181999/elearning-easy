@@ -2,10 +2,10 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
 
     <div class="d-flex justify-content-center align-items-center">
-      <%if logged_in? %>
-        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
           Filter
         </a>
+      <%if logged_in? %>
         <%if isAdmin?%>
           <a class="btn btn-primary" data-toggle="collapse" href="#collapse-import-word" role="button" aria-expanded="false" aria-controls="collapseExample">
             Import word
@@ -33,7 +33,7 @@
             class:"btn border-primary"
             %>
             <%=select_tag "stateWord", 
-              options_for_select([["all",0],["remembered",1],["not learn",2]]), class:"btn border-primary"%>
+              options_for_select([["all",0],["remembered",1],["not learn",2]]), class:"btn border-primary" if logged_in?%>
             <%= submit_tag "filter", class:"btn btn-primary" %>
           <% end %>
       </div>

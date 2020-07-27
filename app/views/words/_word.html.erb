@@ -2,13 +2,20 @@
   language= word.lessons.present? ? word.lessons[0].course.course_category.name : "English"
 %>
 <%unless request.url.include? "flashcard"%>
-<div>
+<div id="word-<%=word.id%>">
   <div><%=word.word%></div>
   <div><%=word.meaning%></div>
   <%if word.picture? %>
     <%= image_tag(word.picture.url)%>
   <%else%>
     <%= image_tag("default_img.png")%>
+  <%end%>
+  <%if logged_in?%>
+  <%= link_to("Delete", "/words/#{word.id}", 
+      class:"btn btn-danger", 
+      method: "delete", 
+      remote: true,
+      data: { confirm: 'Are you sure?' }) if isAdmin? %>
   <%end%>
   <svg word="<%=word.word%>" language=<%=language%> 
     width="32px" height="32px" viewBox="0 0 16 16" 

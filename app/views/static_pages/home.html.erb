@@ -1,2 +1,12 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="row">
+   <div class="col-md-3">
+       <%@users.each do |user|%>
+          <div><%=user.name%></div>
+          <div><%=Study.where(user_id: user.id).count%> learned words</div>
+       <%end%>
+    </div>
+
+    <div class="col-md-9">
+       
+    </div>
+</div>

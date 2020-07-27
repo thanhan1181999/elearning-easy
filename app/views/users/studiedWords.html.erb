@@ -1,5 +1,4 @@
-<% @studys.each do |study|%>
-  <div>
-    <%=study.word.word%>
-  </div>
-<% end %>
+<div class="lessonShowWord">
+  <%= render @words %>
+</div>
+<%= will_paginate @words%> 

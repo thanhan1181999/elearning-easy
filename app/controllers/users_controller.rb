@@ -61,7 +61,8 @@ class UsersController < ApplicationController
 
   #show words remember
   def studiedWords
-    @studys = Study.where(user_id: params[:id])
+    @studys = Study.where(user_id: params[:id]).pluck(:word_id)
+    @words = Word.where(id: @studys).paginate(page: params[:page],per_page: 10)
   end
 
   def joinedCourses

@@ -1,4 +1,5 @@
-<a href="<%= lesson_path(lesson.id)%>" class="linkLessionOfList">
+<div id="lesson-<%=lesson.id%>">
+<a href="<%= lesson_path(lesson.id)%>" class="linkLessionOfList" data-turbolinks="false">
     <% if lesson.picture?%>
         <%= image_tag(lesson.picture.url) %>
     <% elsif%>
@@ -11,4 +12,12 @@
         <%=lesson.words.count %> words
     </div>
 </a>
+<div>
+    <%= link_to("Delete", "/lessons/#{lesson.id}", 
+      class:"btn btn-danger", 
+      method: "delete", 
+      remote: true,
+      data: { confirm: 'Are you sure?' }) if current_user? lesson.course.user %>
+</div>
+</div>
 

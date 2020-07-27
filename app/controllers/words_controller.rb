@@ -1,7 +1,6 @@
 class WordsController < ApplicationController
-  before_action :logged_in_user, only: [:importFromFile]
-  before_action :admin_user, only: [:importFromFile]
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :importFromFile]
+  before_action :admin_user, only: [:importFromFile, :destroy]
   
   def index
     @courseCategory=CourseCategory.all
@@ -10,9 +9,14 @@ class WordsController < ApplicationController
       sort = params[:sort]
       type = params[:type]
       stateWord = params[:stateWord]
-      @words_array = Word.filterOrder(sort)
-      .filterType(type)
-      .filterStateWord(stateWord,current_user.id)
+      if logged_in?
+        @words_array = Word.filterOrder(sort)
+        .filterType(type)
+        .filterStateWord(stateWord,current_user.id)
+      else
+        @words_array = Word.filterOrder(sort)
+        .filterType(type)
+      end
       @words = Kaminari.paginate_array(@words_array).page(params[:page]).per(10)
     else
       @words_array = Word.all.to_a
@@ -76,6 +80,15 @@ def importFromFile
   redirect_to words_path
 end
 
+def destroy
+  @word = Word.find(params[:id])
+  if @word.destroy
+    respond_to do |format|
+      format.html {redirect_to words_path}
+      format.js
+    end
+  end
+end
   private
     def word_param
       params.require(:word).permit(:word, :picture, :meaning, :course_category_id)

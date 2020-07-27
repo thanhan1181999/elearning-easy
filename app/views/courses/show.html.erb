@@ -1,6 +1,6 @@
     
     <div>
-    <%= @course.name %>
+    <h3 class="text-center"><%= @course.name %></div>
     <%= link_to("add a new lesson", 
         new_lesson_path(course_id: @course.id),
         class: "btn btn-primary") if current_user?(Course.find(params[:id]).user) %>
