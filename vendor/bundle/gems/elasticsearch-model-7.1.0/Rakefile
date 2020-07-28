@@ -1,0 +1,73 @@
+# Licensed to Elasticsearch B.V. under one or more contributor
+# license agreements. See the NOTICE file distributed with
+# this work for additional information regarding copyright
+# ownership. Elasticsearch B.V. licenses this file to you under
+# the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#	http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+require 'bundler/gem_tasks'
+
+desc 'Run unit tests'
+task default: 'test:all'
+task test:    'test:all'
+
+GEMFILES = ['4.0.gemfile', '5.0.gemfile', '6.0.gemfile']
+
+namespace :bundle do
+  desc 'Install dependencies for all the Gemfiles in /gemfiles. Optionally define env variable RAILS_VERSIONS. E.g. RAILS_VERSIONS=3.0,5.0'
+  task :install do
+    unless defined?(JRUBY_VERSION)
+      puts '-'*80
+      gemfiles = ENV['RAILS_VERSIONS'] ? ENV['RAILS_VERSIONS'].split(',').map { |v| "#{v}.gemfile"} : GEMFILES
+      gemfiles.each do |gemfile|
+        Bundler.with_clean_env do
+          sh "bundle install --gemfile #{File.expand_path('../gemfiles/'+gemfile, __FILE__)}"
+        end
+        puts '-'*80
+      end
+    end
+  end
+end
+
+# ----- Test tasks ------------------------------------------------------------
+
+require 'rake/testtask'
+namespace :test do
+  desc 'Run all tests. Optionally define env variable RAILS_VERSIONS. E.g. RAILS_VERSIONS=3.0,5.0'
+  task :all, [:rails_versions] do |task, args|
+    gemfiles = ENV['RAILS_VERSIONS'] ? ENV['RAILS_VERSIONS'].split(',').map {|v| "#{v}.gemfile"} : GEMFILES
+    puts '-' * 80
+    gemfiles.each do |gemfile|
+      sh "BUNDLE_GEMFILE='#{File.expand_path("../gemfiles/#{gemfile}", __FILE__)}' " +
+             " bundle exec rspec"
+      puts '-' * 80
+    end
+  end
+end
+
+# ----- Documentation tasks ---------------------------------------------------
+
+require 'yard'
+YARD::Rake::YardocTask.new(:doc) do |t|
+  t.options = %w| --embed-mixins --markup=markdown |
+end
+
+# ----- Code analysis tasks ---------------------------------------------------
+
+if defined?(RUBY_VERSION) && RUBY_VERSION > '1.9'
+  require 'cane/rake_task'
+  Cane::RakeTask.new(:quality) do |cane|
+    cane.abc_max = 15
+    cane.no_style = true
+  end
+end

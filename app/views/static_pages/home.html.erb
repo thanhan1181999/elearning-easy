@@ -12,7 +12,7 @@ end
 %>
 <div class="row">
    <div class="col-md-3">
-      <div class="border border-primary rounded p-1">
+      <div class="border border-primary rounded">
          <h3 class="text-center mt-3 mb-3">Rank by studied Words</h3>
          <%@users.each_with_index do |user,index|%>
             <div class="m-1 home-ranking-item">
@@ -30,7 +30,7 @@ end
       </div>
     </div>
 
-    <div class="col-md-9 border border-primary rounded p-1">
+    <div class="col-md-9 border border-primary rounded">
        <h3 class="text-center mt-3 mb-3">The most popular courses</h3>
        <div class="row">
          <%=render @courses %>

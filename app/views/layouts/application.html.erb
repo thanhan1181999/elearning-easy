@@ -17,7 +17,7 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
-    <div style="position: absolute;top: 65px;left:0; right:0">
+    <div style="padding-top:20px;">
       <div class="container-fluid">
         <% flash.each do |message_type, message| %>
           <div class="alert alert-<%= message_type %> text-center"><%= message %></div>
@@ -25,6 +25,7 @@
         <%= yield %>
       </div>
       <%= render 'layouts/footer' %>
+      <%= render 'search/form' %>
     </div>
      
   </body>

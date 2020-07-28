@@ -1,4 +1,11 @@
+require 'elasticsearch/model'
+
 class Word < ApplicationRecord
+     # full text search
+    
+     include Elasticsearch::Model
+     include Elasticsearch::Model::Callbacks
+
     has_and_belongs_to_many :lessons
     has_many :studies, dependent: :destroy
     
@@ -20,4 +27,25 @@ class Word < ApplicationRecord
             end
         end
     }
+
+    def self.search(query)
+        __elasticsearch__.search(
+          {
+            query: {
+              multi_match: {
+                query: query,
+                fields: [:word]
+              }
+            },
+            highlight: {
+              pre_tags: ['<em>'],
+              post_tags: ['</em>'],
+              fields: {
+                word: {}
+              }
+            }
+          }
+        )
+      end
+
 end

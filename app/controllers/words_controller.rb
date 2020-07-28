@@ -89,6 +89,11 @@ def destroy
     end
   end
 end
+
+def autocomplete
+  render json: Word.search(params[:query]).map(&:word)  
+end
+
   private
     def word_param
       params.require(:word).permit(:word, :picture, :meaning, :course_category_id)

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :words do
     collection do
-      get :filter
+      get :filter, :autocomplete
       post :importFromFile
     end
   end
@@ -52,7 +52,11 @@ Rails.application.routes.draw do
   resources :joins, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   
+  # login with social account
   devise_for :users,
   path: '',
   controllers: {omniauth_callbacks: 'omniauth_callbacks' }
+
+  # search full text search
+  get '/search', to: "search#index"
 end

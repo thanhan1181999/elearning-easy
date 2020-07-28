@@ -1,0 +1,7 @@
+<% unless @words.nil? %>
+  <div class="lessonShowWord">
+  <%= render partial: 'words/word', collection: @words %>
+</div>
+<% else %>
+  <div>No result</div>
+<% end %>
