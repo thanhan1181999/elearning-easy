@@ -47,8 +47,12 @@ gem "omniauth-twitter"
 # gem 'image_processing', '~> 1.2'
 
 # full text search
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+# gem 'elasticsearch-model'
+# gem 'elasticsearch-rails'
+# gem 'bootstrap-typeahead-rails'
+
+# search
+gem "ransack"
 gem 'bootstrap-typeahead-rails'
 
 # Reduces boot times through caching; required in config/boot.rb

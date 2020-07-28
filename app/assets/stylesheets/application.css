@@ -12,5 +12,6 @@
  *
  *= require bootstrap
  *= require_tree .
+ *= require easy-autocomplete
  *= require_self
  */

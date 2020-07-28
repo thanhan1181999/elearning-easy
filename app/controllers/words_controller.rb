@@ -5,6 +5,10 @@ class WordsController < ApplicationController
   def index
     @courseCategory=CourseCategory.all
     
+    # cái này dùng để search 
+    @q = Word.ransack(params[:q])
+
+    # cái này dùng để sort
     unless params[:sort].blank? && params[:type].blank? && params[:stateWord].blank?
       sort = params[:sort]
       type = params[:type]
@@ -19,7 +23,7 @@ class WordsController < ApplicationController
       end
       @words = Kaminari.paginate_array(@words_array).page(params[:page]).per(10)
     else
-      @words_array = Word.all.to_a
+      @words_array = @q.result.to_a
       @words = Kaminari.paginate_array(@words_array).page(params[:page]).per(10)
     end
   end
@@ -91,7 +95,7 @@ def destroy
 end
 
 def autocomplete
-  render json: Word.search(params[:query]).map(&:word)  
+  render json: Word.where("word LIKE '#{params[:q]}%'").pluck(:word) 
 end
 
   private

@@ -2,8 +2,11 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
 
     <div class="d-flex justify-content-center align-items-center">
-    <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
           Filter
+        </a>
+        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-search-word" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Search
         </a>
       <%if logged_in? %>
         <%if isAdmin?%>
@@ -21,6 +24,19 @@
           <%=select("","course_category_id", CourseCategory.all.collect{|p| [p.name,p.id]},{}, class:"btn border-primary")%>
           <%=submit_tag "Import", class: "btn btn-primary"%>
         <%end%>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapse-search-word">
+      <div class="card card-body">
+      <%= search_form_for @q do |f| %>
+        <%= f.label :word_start%>
+        <%= f.search_field :word_start, 
+        class:"btn border-primary", 
+        data_behavior: :autocomplete
+        %>
+        <%= f.submit "Search",class: "btn btn-primary" %>
+      <% end %>
       </div>
     </div>
 
@@ -53,3 +69,21 @@
 <%= javascript_pack_tag 'textToSpeech'%>
 
 <!--remote: true, data_type: 'script'  onchange: "this.form.submit()"-->
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<script>
+$('document').ready(function(){
+  var words = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: '/words/autocomplete?q=%QUERY',
+      wildcard: '%QUERY'
+    }
+  });
+  $('*[data_behavior="autocomplete"]').typeahead(null, {
+    source: words
+  });
+})
+</script>

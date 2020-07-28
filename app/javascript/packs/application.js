@@ -2,14 +2,17 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-global.$ = jQuery
+// global.$ = jQuery
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
-import "bootstrap"
+require("jquery")
 
+require("easy-autocomplete")
+
+require("bootstrap")
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -19,6 +22,7 @@ import "bootstrap"
 require("packs/textToSpeech")
 require("packs/flashcard") 
 require("packs/test1") 
+import "packs/searchWord"
 
 
 
