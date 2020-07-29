@@ -1,5 +1,5 @@
 
-  <div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="d-flex flex-column justify-content-center align-items-center ">
 
     <div class="d-flex justify-content-center align-items-center">
         <a class="btn btn-primary mr-2" data-toggle="collapse" href="#collapse-filter-word" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -32,7 +32,7 @@
       <%= search_form_for @q do |f| %>
         <%= f.label :word_start%>
         <%= f.search_field :word_start, 
-        class:"btn border-primary", 
+        class:"btn border-primary text-left", 
         data_behavior: :autocomplete
         %>
         <%= f.submit "Search",class: "btn btn-primary" %>
