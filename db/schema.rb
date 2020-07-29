@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_031710) do
+ActiveRecord::Schema.define(version: 2020_07_29_043518) do
+
+  create_table "chats", force: :cascade do |t|
+    t.text "message"
+    t.string "username"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "course_categories", force: :cascade do |t|
     t.string "name"
@@ -56,6 +63,14 @@ ActiveRecord::Schema.define(version: 2020_07_28_031710) do
     t.integer "word_id", null: false
     t.index ["lesson_id", "word_id"], name: "index_lessons_words_on_lesson_id_and_word_id"
     t.index ["word_id", "lesson_id"], name: "index_lessons_words_on_word_id_and_lesson_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "sender_id"
+    t.string "content"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "relationships", force: :cascade do |t|

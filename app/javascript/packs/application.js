@@ -24,6 +24,7 @@ require("easy-autocomplete")
 require("packs/textToSpeech")
 require("packs/flashcard") 
 require("packs/test1") 
+require("packs/chat")
 
 
 

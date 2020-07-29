@@ -1,0 +1,134 @@
+<%# app/views/chats/index.html.erb %>
+<div class="container-fluid">
+  <div id="socket_id">
+  </div>
+  <div>
+    number online
+    <span id="online-people-number"></span>
+  </div>
+  <div class="row">
+    <div class="col-3 col-md-2 bg-dark full-height sidebar">
+      <div class="sidebar-content">
+        <input type="text" class="form-control sidebar-form" placeholder="Enter a username" required />
+        <h4 class="text-white mt-5 text-center username d-none">Hello </h4>
+      </div>
+    </div>
+    <div class="col-9 col-md-10 bg-light full-height">
+      <div class="container-fluid">
+        <div class="chat-box py-2">
+          <% @chats.each do |chat| %>
+            <div class="col-12">
+              <div class="chat bg-secondary d-inline-block text-left text-white mb-2">
+                <div class="chat-bubble">
+                  <small class="chat-username"><%= chat.username %></small>
+                  <p class="m-0 chat-message"><%= chat.message %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="chat-text-input">
+          <%= form_with(model: @chat, remote: true, format: :json, id: 'chat-form') do |form| %>
+            <% if @chat.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+                <ul>
+                  <% @chat.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="field position-relative">
+              <%= form.text_field :message, id: :message, class: "form-control", required: true, disabled: true %>
+              <%= form.hidden_field :username, id: :username %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  let username = '';
+
+  let updateChat = (data) => {
+    $('.chat-box').append(`
+      <div class="col-12">
+        <div class="chat bg-secondary d-inline-block text-left text-white mb-2">
+          <div class="chat-bubble">
+            <small class="chat-username">${data.username}</small>
+            <p class="m-0 chat-message">${data.message}</p>
+          </div>
+        </div>
+      </div>
+    `);
+  };
+
+  $('.sidebar-form').keyup(event => {
+    if (event.keyCode == 13) {
+      username = event.target.value;
+      $('.username').append(username);
+      $('#username').val(username);
+      $('.username').removeClass('d-none');
+      $('.sidebar-form').addClass('d-none');
+      $('#message').removeAttr("disabled");
+      $('#message').focus();
+    }
+  });
+
+  $('#chat-form').on('ajax:success', data => {
+    $('#chat-form')[0].reset();
+  });
+
+  //  real time
+  Pusher.logToConsole = true;
+  let pusher = new Pusher(
+    '1e12ba03bedaf5787000',
+    {
+      cluster: 'ap1',
+      encrypted: true,
+      authEndpoint: '/chats/auth',
+      auth: {
+         headers: {
+          'X-CSRF-Token': "<%= form_authenticity_token %>"
+        }
+      }
+    }
+  );
+
+  pusher.connection.bind('connected', function () {
+    var socket_id = pusher.connection.socket_id; 
+    $('#socket_id').text(socket_id);
+  });
+
+  let channel = pusher.subscribe('chat-channel')
+  channel.bind('chat-event', data => {
+    console.log("data", data)
+    updateChat(data);
+  });
+
+  var presenceChannel = pusher.subscribe('presence-user')
+  presenceChannel.bind(
+    "pusher:subscription_succeeded",
+    function(members){
+      console.log("the current members are", members)
+    }
+  );
+  presenceChannel.bind(
+    "pusher:member_added",
+    function(member){
+      console.log("A new member is online", member)
+    }
+  );
+  presenceChannel.bind(
+    "pusher:member_removed",
+    function(member){
+      console.log("This member is now offline", member)
+    }
+  );
+
+});
+</script>

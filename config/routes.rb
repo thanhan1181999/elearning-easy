@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'chats/index'
+  get 'chats/create'
+  get 'chats/new'
+  get 'chats/show'
   get 'password_resets/new'
   get 'password_resets/edit'
   root 'static_pages#home'
@@ -59,4 +63,10 @@ Rails.application.routes.draw do
 
   # search full text search
   get '/search', to: "search#index"
+
+  resources :chats do
+    collection do
+      post :auth
+    end
+  end
 end

@@ -53,7 +53,9 @@ gem "omniauth-twitter"
 
 # search
 gem "ransack"
-gem 'bootstrap-typeahead-rails'
+
+gem 'pusher'
+gem 'figaro'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
