@@ -25,18 +25,29 @@ end
 %>
 
 <div id="carousel-test-1" class="p-4 carousel slide" 
-style="max-width: 800px; margin: auto;">
+style="max-width: 800px; margin: auto;position:relative">
 
   <div id="alert-message-from-server"></div>
   <div class="text-center mb-3">
-    <div class="bg-info p-2 rounded d-inline">
+    <div class="bg-info p-2 rounded d-inline ml-2">
       cau <span id="current-active">0</span>/<%=@length%>
     </div>
-    <div class="bg-info p-2 rounded d-inline">
-      <span id="current-false">0</span> sai / 
-      <span id="current-true">0</span> dung
+    <div class="bg-info p-2 rounded d-inline ml-2">
+      <span id="current-false">0</span> Sai / 
+      <span id="current-true">0</span> Đúng /
+      <span id="current-miss">0</span> Chưa trả lời
     </div>
   </div>
+  
+  <div class="w-75 m-auto  mb-2 d-flex align-items-center">
+    <div id="pro-test1-second">
+      6s
+    </div>
+    <div class="progress flex-grow-1 ml-2">
+      <div id="pro-test1" class="progress-bar bg-info" role="progressbar" 
+        style="width: 100%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="6000"></div>
+      </div>  
+    </div>
 
   <div class="carousel-inner">
 
