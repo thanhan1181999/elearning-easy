@@ -57,5 +57,32 @@ $(document).ready(function(){
     $('.carousel-control-prev').addClass('fadeout');
     $('.carousel-control-next').addClass('fadeout');
   })
+  ///click to change state remember or not rememner
+  $('.flashcard_remember_active_word').click(function(){
+    let flashcard_remember_active_word =$(this)
+    let word_id = $(this).attr("word_id")
+    let state = $(this).attr("state")
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    let method = state=="true" ? "DELETE" : "POST"
+    let url = state=="true" ? `/studies/delete` : `/studies`
+    let data = {
+      study:{
+        user_id : $('#current_user_id').text(),
+        word_id
+      }
+    }
+    $.ajax({
+      method, url, data, dataType: 'script'
+    })
+    .done(function(){
+      state = state=="true" ? "false" : "true"
+      flashcard_remember_active_word.attr("state",state)
+      flashcard_remember_active_word.text(state=="true" ? "state : Remembered" : "state : Not remember")
+    })
+  })
 })
 

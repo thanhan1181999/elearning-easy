@@ -19,6 +19,9 @@ class LessonsController < ApplicationController
   def flashcard
     @lesson = Lesson.find(params[:id])
     @words = @lesson.words
+    if logged_in?
+      @studies = Study.where(user_id:current_user.id, word_id: @words.ids).pluck(:word_id)
+    end
   end
   def test1
     @lesson = Lesson.find(params[:id])

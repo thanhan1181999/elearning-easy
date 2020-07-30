@@ -36,7 +36,7 @@ class WordsController < ApplicationController
     @lesson = Lesson.find(params[:word][:lesson_id])
     @word = Word.new(word_param)
     if @lesson.words << @word
-      flash[:seccess] = "added a word"
+      flash[:success] = "added a word"
       redirect_to lesson_path(params[:word][:lesson_id])
     else
       render 'new'
