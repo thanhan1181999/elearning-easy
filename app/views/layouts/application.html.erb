@@ -11,7 +11,34 @@
     
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <!--<script src="https://js.pusher.com/4.1/pusher.min.js"></script>-->
+    <script>
+    Pusher.logToConsole = true;
+    if(!pusher){
+      var pusher = new Pusher(
+      '1e12ba03bedaf5787000',
+      {
+        cluster: 'ap1',
+        encrypted: true,
+        authEndpoint: '/chats/auth',
+        auth: {
+          headers: {
+            'X-CSRF-Token': "<%= form_authenticity_token %>"
+          }
+        }
+      }
+    );
+    }
+    <%if logged_in? %>
+      var privateChannel = pusher.subscribe(`user-<%=current_user.name%>`)
+      privateChannel.bind('new-join-course',function(data){
+        alert(`${data.user_name} joinded course ${data.course_name}`)
+      })
+      privateChannel.bind('follow',function(data){
+        alert(`${data.user_name} have just followed you`)
+      })
+    <%end%>
+    </script>
   </head>
 
   <body>

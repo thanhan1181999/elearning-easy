@@ -66,24 +66,8 @@
   <%=paginate @words,theme: 'twitter-bootstrap-4' %>  
 </div>
 
-<%= javascript_pack_tag 'textToSpeech'%>
-
 <!--remote: true, data_type: 'script'  onchange: "this.form.submit()"-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
 <script>
-$('document').ready(function(){
-  var words = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.whitespace,
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {
-      url: '/words/autocomplete?q=%QUERY',
-      wildcard: '%QUERY'
-    }
-  });
-  $('*[data_behavior="autocomplete"]').typeahead(null, {
-    source: words
-  });
-})
 </script>
