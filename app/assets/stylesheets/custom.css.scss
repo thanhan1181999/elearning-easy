@@ -30,6 +30,19 @@ body{
 .bg-user-online{
     background-color: #F2F3F5;
 }
+.bg-header{
+    background-color: black;
+    color:white!important;
+    box-shadow: -3px -5px 8px 2px white;
+    padding:0!important
+}
+.nav-link{
+    color: white;
+    font-weight: 600;
+    &:hover{
+      color: green;  
+    }
+}
 .cursor{
     cursor: pointer;
 }
@@ -93,6 +106,7 @@ h1 {
         border: 1px solid #ddd;
         margin: 7px;
         padding: 5px;
+        background-color:floralwhite;
         div:nth-child(2){
             flex-grow: 1;
             border: none;

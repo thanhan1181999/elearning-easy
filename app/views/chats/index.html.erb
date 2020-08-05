@@ -1,11 +1,11 @@
 <%# app/views/chats/index.html.erb %>
-<div class="container-fluid">
+<div class="container">
   <div class="row" style="height:100vh">
     <div class="col-md-2 border border-danger bg-user-online d-flex flex-column">
       <div><span class="update_member_count">0</span> people online</div>
       <div class="online-user d-flex flex-column"></div>
     </div>
-    <div class="col-md-10 border border-danger">
+    <div class="col-md-10 border border-danger bg-user-online">
       <div class="chat-box">
         <%@chats.each do |chat| %>
           <div>
@@ -23,7 +23,7 @@
 
     </div>
   </div>
-
+</div>
 
 <script>
 $(document).ready(function() {

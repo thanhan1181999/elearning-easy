@@ -10,9 +10,10 @@
    end
 end
 %>
-<div class="row">
+<div class="container-fluid">
+   <div class="row">
    <div class="col-md-3">
-      <div class="border border-primary rounded">
+      <div class="border rounded bg-white">
          <h3 class="text-center mt-3 mb-3">Rank by studied Words</h3>
          <%@users.each_with_index do |user,index|%>
             <div class="m-1 home-ranking-item">
@@ -30,10 +31,13 @@ end
       </div>
     </div>
 
-    <div class="col-md-9 border border-primary rounded">
-       <h3 class="text-center mt-3 mb-3">The most popular courses</h3>
-       <div class="row">
-         <%=render @courses %>
-       </div>
+    <div class="col-md-9" style="padding-left:0!important">
+      <div class="bg-white border rounded">
+         <h3 class="text-center">The most popular courses</h3>
+         <div style="display:flex;flex-wrap:wrap">
+            <%=render @courses %>
+         </div>
+      </div>
     </div>
+</div>
 </div>
