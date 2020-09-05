@@ -2,7 +2,8 @@
 <div id="current_user_id" style="display:none"><%=session[:user_id]%></div>
 
 <div class="container text-center" style="background:darkorange">
-<h3 style="text-align:center;display:inline">flash card of lesson <%=params[:id]%></h3>
+<!---->
+<h2 style="text-align:center;display:inline">flash card of lesson <%=params[:id]%></h3>
 <br/>
 <button id="flashcard_auto" class="btn btn-primary">Auto</button>
 <button id="flashcard_paused" class="btn btn-primary">Paused</button>
@@ -21,7 +22,7 @@
     <span class="sr-only">Next</span>
   </a>
 
-  <div style="max-width: 500px; margin: 10px auto;text-align:center">
+  <div style="max-width: 500px; margin:2px auto 0px;text-align:center">
     <div class="progress" >
       <div id="pro-flashCard"class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="<%=length%>"></div>
     </div>
@@ -30,4 +31,9 @@
 
 </div>
 </div>
-
+<script>
+  //window.location.reload();
+  $(document).ready(function(){
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+  });
+</script>

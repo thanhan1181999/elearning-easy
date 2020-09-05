@@ -1,8 +1,10 @@
-create a new lesson
+<h3 style="text-align:center; padding:20px">Create a new lesson</h3>
+<div class="container mb-2" style="max-width:700px">
 <%= form_for(@lesson, html:{multipart:true}) do |f|%>
   <%= render 'shared/error_messages', object: f.object %> 
-  <%= f.text_area :name %>
+  <%= f.text_area :name,placeholder: "name of lesson...", class:"form-control", style:"height:50px" %>
   <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'%>
   <%= f.text_area :course_id, value: params[:course_id] , style: "display:none" %>
-  <%= f.submit "Create lesson", class: "btn btn-primary"%>
+  <%= f.submit "Create lesson", class: "btn btn-primary m-auto d-block" %>
 <% end%>
+</div>

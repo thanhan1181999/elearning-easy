@@ -44,8 +44,8 @@
 
   <body>
     <%= render 'layouts/static/header' %>
-    
-     <div class="hero-wrap js-fullheight" style="height: 601px;display:none">
+
+    <div class="hero-wrap js-fullheight" style="height: 601px;">
       <div class="overlay"></div>
       <div id="particles-js"></div>
       <div class="container">
@@ -56,30 +56,30 @@
               <strong>Easy</strong> 
               
             </h1>
-            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-              <%=link_to "Start", login_path, class:"btn btn-primary btn-outline-white px-5 py-3"%>
-            </p>
+            <%unless logged_in? %>
+              <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
+                <%=link_to "Start", login_path, class:"btn btn-primary btn-outline-white px-5 py-3"%>
+              </p>
+            <%end%>
+            
           </div>
         </div>
       </div>
     </div>
-
+    
     <div class="container-fluid">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
 
-    <div class="container-fluid pt-4" style="z-index:100">
+    <div class="container-fluid bg-light" style="z-index:100">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %> text-center"><%= message %></div>
       <% end %>
       <%= yield %>
     </div>
     
-    <%unless request.fullpath.include?('chats/index') || request.fullpath.include?('test1') || request.fullpath.include?('flashcard')%>
-      <%= render 'layouts/static/footer' %>
-    <%end%>
-    
+    <%= render 'layouts/static/footer' %>
     <%= javascript_pack_tag 'main'%>
   </body>
 </html>

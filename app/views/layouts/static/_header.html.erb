@@ -1,4 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+<% def current_link(path) 
+   if request.fullpath.include?(path)
+      'nav-item active'
+   else
+      'nav-item'
+   end
+end
+%>
+
+<% def state_of_header 
+   if request.fullpath.include?('home') || request.fullpath.include?('about') || request.fullpath == '/'
+      ['navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light',
+      '']
+   elsif request.fullpath.include?('test1') || request.fullpath.include?('flashcard') 
+      ['navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light scrolled awake',
+      'position:relative!important']
+   else
+      ["navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light scrolled awake",
+      '']
+   end
+end
+%>
+
+
+<nav class="<%=state_of_header[0]%>" id="ftco-navbar"
+style="<%=state_of_header[1]%>">
   <div class="container">
     <a class="navbar-brand" href="<%=root_path%>">
       <%= image_tag(image_url("logo1.gif"),
@@ -11,24 +36,24 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
+        <li class="<%=current_link('home')%>">
           <%= link_to "Home",  home_path, class:"nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="<%=current_link('about')%>">
           <%= link_to "About", about_path, class:"nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="<%=current_link('words')%>">
           <%= link_to "Words", words_path, class:"nav-link", data: { turbolinks: "false" } %>
         </li>
-        <li class="nav-item">
+        <li class="<%=current_link('courses')%>">
           <%= link_to "Courses", courses_path, class:"nav-link" %>  
         </li>
         <% if logged_in? %>    
-          <li class="nav-item">
+          <li class="<%=current_link('users')%>">
             <%= link_to "People", users_path, class:"nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Chat", chats_index_path, class:"nav-link" %>
+          <li class="<%=current_link('chats/index')%>">
+            <%= link_to "Chat", chats_index_path, class:"nav-link", data: { turbolinks: "false" }%>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="portfolio.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

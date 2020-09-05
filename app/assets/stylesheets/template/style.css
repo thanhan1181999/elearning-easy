@@ -3671,6 +3671,7 @@ input[type="button"].btn-block {
 
 .card-img-top {
   width: 100%;
+  height: 313px;
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px); }
 
@@ -7637,7 +7638,7 @@ h1, h2, h3, h4, h5,
 
 .ftco-section-featured {
   margin-top: -250px;
-  padding-bottom: 7em; }
+  padding-bottom: 4em; }
   .ftco-section-featured .container {
     z-index: 2;
     position: relative; }

@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  layout "static/application"
   def home
     #10 course duoc join nhieu nhat
     @courses_ids= Join.group("course_id").order("count(user_id) DESC").limit(6).pluck("course_id")

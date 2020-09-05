@@ -27,6 +27,9 @@ body{
 .bg-44{
     background-color: #b4f2e1;
 }
+.bg-55{
+    background-color: mistyrose;
+}
 .bg-user-online{
     background-color: #F2F3F5;
 }
@@ -256,4 +259,12 @@ h1 {
     left: 50%;
     transform: translate(-50%,-50%);
     z-index: 100;
+}
+
+// chat-form-write
+.chat-form-write{
+    position: absolute;
+    bottom:0;
+    width: 95%;
+    padding-top: 5px;
 }

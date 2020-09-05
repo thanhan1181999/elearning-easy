@@ -24,8 +24,8 @@ end
 end
 %>
 
-<div id="carousel-test-1" class="p-4 carousel slide" 
-style="max-width: 800px; margin: auto;position:relative">
+<div id="carousel-test-1" class="p-2 carousel slide" 
+style="max-width: 800px; margin: auto;position:relative;color:black">
 
   <div id="alert-message-from-server"></div>
   <div class="text-center mb-3">
@@ -66,7 +66,7 @@ style="max-width: 800px; margin: auto;position:relative">
 
           <figure class="figure" style="max-width: 360px">
             <% if word.picture?%>
-              <%= image_tag(word.picture.url, class:"img-thumbnail w-100 figure-img img-fluid rounded")%>
+              <%= image_tag(word.picture.url, class:"img-thumbnail w-100 figure-img img-fluid rounded", style:"height:250px")%>
             <% else %>
               <%= image_tag("default_img.png", class:"img-thumbnail w-100 figure-img img-fluid rounded")%>
             <% end %>
@@ -118,5 +118,8 @@ style="max-width: 800px; margin: auto;position:relative">
 <%=render 'shared/modal'%>
 <script>
   //window.location.reload();
+  $(document).ready(function(){
+    $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+  });
 </script>
 <!--<%= javascript_pack_tag 'test1' %>-->

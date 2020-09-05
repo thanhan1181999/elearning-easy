@@ -5,7 +5,8 @@ class Relationship < ApplicationRecord
   validates :followed_id, presence: true
   after_save :notify_pusher
   def notify_pusher
-    Pusher.trigger("user-#{User.find(self.followed_id).name}", 'follow', {
+    Pusher.trigger("user-#{User.find(self.followed_id).name.gsub!(/\s+/, '')}", 
+    'follow', {
       user_name: User.find(self.follower_id).name
     })
   end
